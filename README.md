@@ -56,3 +56,69 @@ for (int i = 0; i < dtTemp.Rows.Count; i++)
 Calendar_DateChanged(); // 로드시 일정 바로 조회
 helper.Close();
 ```
+
+```
+// SQLServer 에서 PUSH 방식으로 데이터 게더링.
+		SqlDependency sd;
+
+
+		public Form1()
+		{
+			InitializeComponent();
+
+ 
+
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			sCon = new SqlConnection(sConn);
+			sCon.Open();
+
+			SqlDependency.Start(sConn);
+			GetLastDBState(true);
+		}
+
+		public void GetLastDBState(bool FirstStart)
+		{
+
+			// 반드시 테이블의 스키마 dbo 를 붙이고 사용한다.
+			SqlCommand sc = new SqlCommand(@"select [message], [senddate] from dbo.TB_Message", sCon);
+			sd = new SqlDependency(sc);
+
+			sd.OnChange += Sd_OnChange;
+			SqlDataReader rdr =  sc.ExecuteReader();
+			rdr.Close();
+			if (FirstStart) return;
+
+			// 새로운 insert 내역이 발생 하였을 경우 Database 접근.
+			
+			SqlDataAdapter Adapter = new SqlDataAdapter("select top 1 senddate, message from dbo.TB_Message order by senddate desc", sCon);
+			DataTable dtTemp = new DataTable();
+			Adapter.Fill(dtTemp);
+			this.Invoke(new Action(() => { textBox2.Text += dtTemp.Rows[0]["senddate"].ToString() + " \r\n" + dtTemp.Rows[0]["message"].ToString() + "\r\n\r\n"; }));
+			this.Invoke(new Action(delegate ()
+			{
+				textBox2.Text += dtTemp.Rows[0]["senddate"].ToString() +  " \r\n" +  dtTemp.Rows[0]["message"].ToString() + "\r\n\r\n";
+			}));
+		}
+
+		private void Sd_OnChange(object sender, SqlNotificationEventArgs e)
+		{
+			
+			if (e.Info.ToString() == "Insert")
+			{
+				GetLastDBState(false);
+			}
+			else
+
+			{
+				GetLastDBState(true);
+			}
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			SqlDependency.Stop(sConn);
+		}
+```
