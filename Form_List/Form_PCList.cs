@@ -1,5 +1,6 @@
 ﻿using Assambl;
 using DC00_assm;
+using DC00_Component;
 using Infragistics.Win.UltraWinEditors;
 using Infragistics.Win.UltraWinGrid;
 using System;
@@ -34,11 +35,11 @@ namespace Form_List
 		private void Form_PCList_Load(object sender, EventArgs e)
 		{
 			_GridUtil.InitializeGrid(this.MENU);
-			_GridUtil.InitColumnUltraGrid(MENU, "NUM", "순서", false, GridColDataType_emu.Integer, 130, 130, Infragistics.Win.HAlign.Left, false, false);
-			_GridUtil.InitColumnUltraGrid(MENU, "PART" , "부서", false, GridColDataType_emu.VarChar, 130, 130, Infragistics.Win.HAlign.Left, true, false);
-			_GridUtil.InitColumnUltraGrid(MENU, "MENU" , "메뉴", false, GridColDataType_emu.VarChar, 130, 130, Infragistics.Win.HAlign.Left, true, true);
-			_GridUtil.InitColumnUltraGrid(MENU, "TITLE", "이름", false, GridColDataType_emu.VarChar, 120, 120, Infragistics.Win.HAlign.Left, true, true);
-			_GridUtil.InitColumnUltraGrid(MENU, "DATE", "등록일시", false, GridColDataType_emu.DateTime, 200, 120, Infragistics.Win.HAlign.Left, true, false);
+			_GridUtil.InitColumnUltraGrid(MENU, "NUM"  , "순서"    , false, GridColDataType_emu.Integer , 130, 130, Infragistics.Win.HAlign.Left, false, false);
+			_GridUtil.InitColumnUltraGrid(MENU, "PART" , "부서"    , false, GridColDataType_emu.VarChar , 130, 130, Infragistics.Win.HAlign.Left, true, false);
+			_GridUtil.InitColumnUltraGrid(MENU, "MENU" , "메뉴"    , false, GridColDataType_emu.VarChar , 130, 130, Infragistics.Win.HAlign.Left, true, true);
+			_GridUtil.InitColumnUltraGrid(MENU, "TITLE", "이름"    , false, GridColDataType_emu.VarChar , 120, 120, Infragistics.Win.HAlign.Left, true, true);
+			_GridUtil.InitColumnUltraGrid(MENU, "DATE" , "등록일시", false, GridColDataType_emu.DateTime, 200, 120, Infragistics.Win.HAlign.Left, true, false);
 
 			_GridUtil.SetInitUltraGridBind(MENU);
 
@@ -80,18 +81,26 @@ namespace Form_List
 			if (num == 1)
 			{
 				MENU.DisplayLayout.Bands[0].AddNew();
-				MENU.DisplayLayout.Bands[0].Columns["PART"].CellActivation = Activation.AllowEdit; // readonly
+				MENU.ActiveRow.Cells["PART"].IgnoreRowColActivation = true;
+				MENU.ActiveRow.Cells["PART"].Activation = Activation.AllowEdit;
 			}
 			else if (num == 2 && FORM.Rows.Count < 1)
 			{
+				if (MENU.ActiveRow == null)
+				{
+					MessageBox.Show("타이틀을 선택해야 합니다.");
+					return;
+				}
 				FORM.DisplayLayout.Bands[0].AddNew();
+				for(int i = 1; i < FORM.Columns.Count; i++)
+					FORM.ActiveRow.Cells[i].Value = 0;
 			}
 		}
 
 		public override void DoSave()
 		{
+			if (num == 0) return;
 			if (MessageBox.Show($"{num}번째 화면을 저장하시겠습니까?", "화면 저장", MessageBoxButtons.YesNo) == DialogResult.No) return;
-			SqlDataAdapter Adapter;
 			DBHelper helper = new DBHelper();
 			DataTable dtTemp = null;
 			string sMessge = "";
@@ -127,7 +136,6 @@ namespace Form_List
 									throw new Exception(sMessge + "을 입력하지 않았습니다.");
 								}
 								helper.ExecuteNoneQuery("MENU_I", ("@PART", drRow["PART"].ToString()), ("@MENU", drRow["MENU"].ToString()), ("@TITLE", drRow["TITLE"].ToString()));
-								MENU.DisplayLayout.Bands[0].Columns["PART"].CellActivation = Activation.NoEdit;
 								break;
 							case DataRowState.Modified:
 								if (Convert.ToString(drRow["MENU"]) == "")       sMessge = "메뉴";
@@ -136,7 +144,7 @@ namespace Form_List
 								{
 									throw new Exception(sMessge + "을 입력하지 않았습니다.");
 								}
-								helper.ExecuteNoneQuery("MENU_U", ("@PART", drRow["PART"].ToString()), ("@MENU", drRow["MENU"].ToString()), ("@TITLE", drRow["TITLE"].ToString()), ("@DATE", Convert.ToDateTime(drRow["DATE"].ToString())));
+								helper.ExecuteNoneQuery("MENU_U", ("@PART", drRow["PART"].ToString()), ("@MENU", drRow["MENU"].ToString()), ("@TITLE", drRow["TITLE"].ToString()), ("@DATE", string.Format("{0:yyyy-MM-dd  HH:mm:ss}", drRow["DATE"])));
 								break;
 						}
 					}
@@ -176,19 +184,19 @@ namespace Form_List
 								drRow.RejectChanges();
 								if (drRow["FORM"].ToString() == "") continue;
 
-								helper.ExecuteNoneQuery("FORM_IP", ("@FORM", drRow["FORM"].ToString()));
+								helper.ExecuteNoneQuery("FORM_D", ("@FORM", drRow["FORM"].ToString()));
 								
 								break;
 							case DataRowState.Added:
 								if (Convert.ToString(drRow["FORM"]) == "") throw new Exception("화면을 입력하지 않았습니다.");
 								helper.ExecuteNoneQuery("FORM_IP", ("@TITLE", Convert.ToString(MENU.ActiveRow.Cells["TITLE"].Value)), ("@FORM", drRow["FORM"].ToString()), ("@FIND", Convert.ToInt32(drRow["FIND"]))
-																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@TYPE", "I"));
+																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@RT", Convert.ToInt32(drRow["RT"])),("@TYPE", "I"));
 
 								break;
 							case DataRowState.Modified:
 								if (Convert.ToString(drRow["FORM"]) == "") throw new Exception("화면을 입력하지 않았습니다.");
 								helper.ExecuteNoneQuery("FORM_IP", ("@TITLE", Convert.ToString(MENU.ActiveRow.Cells["TITLE"].Value)), ("@FORM", drRow["FORM"].ToString()), ("@FIND", Convert.ToInt32(drRow["FIND"]))
-																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@TYPE", "U"));
+																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@RT", Convert.ToInt32(drRow["RT"])), ("@TYPE", "U"));
 
 								break;
 						}
@@ -222,9 +230,21 @@ namespace Form_List
 
 		public override void DoDelete()
 		{
-			if (num == 1)
+			if (MessageBox.Show($"{num}번째 화면을 삭제하시겠습니까?", "데이터삭제", MessageBoxButtons.YesNo) == DialogResult.No) return;
+			try
 			{
-				MENU.ActiveRow.Delete();
+				if (num == 1)
+				{
+					MENU.ActiveRow.Delete();
+				}
+				else if (num == 2)
+				{
+					FORM.ActiveRow.Delete();
+				}
+			}
+			catch
+			{
+				MessageBox.Show("행을 선택해야 합니다.");
 			}
 		}
 

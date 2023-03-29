@@ -162,28 +162,28 @@
 			this.dtEnd.Location = new System.Drawing.Point(229, 96);
 			this.dtEnd.Name = "dtEnd";
 			this.dtEnd.Size = new System.Drawing.Size(144, 21);
-			this.dtEnd.TabIndex = 11;
+			this.dtEnd.TabIndex = 3;
 			// 
 			// dtStart
 			// 
 			this.dtStart.Location = new System.Drawing.Point(34, 96);
 			this.dtStart.Name = "dtStart";
 			this.dtStart.Size = new System.Drawing.Size(144, 21);
-			this.dtStart.TabIndex = 10;
+			this.dtStart.TabIndex = 2;
 			// 
 			// txtName
 			// 
 			this.txtName.Location = new System.Drawing.Point(270, 31);
 			this.txtName.Name = "txtName";
 			this.txtName.Size = new System.Drawing.Size(100, 21);
-			this.txtName.TabIndex = 9;
+			this.txtName.TabIndex = 1;
 			// 
 			// txtId
 			// 
 			this.txtId.Location = new System.Drawing.Point(74, 31);
 			this.txtId.Name = "txtId";
 			this.txtId.Size = new System.Drawing.Size(100, 21);
-			this.txtId.TabIndex = 8;
+			this.txtId.TabIndex = 0;
 			// 
 			// label6
 			// 
@@ -220,7 +220,6 @@
 			this.ControlBox = false;
 			this.Controls.Add(this.grid1);
 			this.Controls.Add(this.ultraGroupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "Form_LoginList";
 			this.Text = "Form_Login";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

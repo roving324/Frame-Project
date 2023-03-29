@@ -76,11 +76,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_ItemMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ItemMaster.Designer.cs">
+      <DependentUpon>Form_ItemMaster.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_LoginList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_LoginList.Designer.cs">
       <DependentUpon>Form_LoginList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Part.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Part.designer.cs">
+      <DependentUpon>Form_Part.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_PCList.cs">
       <SubType>Form</SubType>
@@ -93,6 +105,18 @@
     </Compile>
     <Compile Include="Form_Process.designer.cs">
       <DependentUpon>Form_Process.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ProductPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ProductPlan.Designer.cs">
+      <DependentUpon>Form_ProductPlan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_SubItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SubItem.Designer.cs">
+      <DependentUpon>Form_SubItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Userlist.cs">
       <SubType>Form</SubType>
@@ -107,16 +131,33 @@
       <DependentUpon>Form_Workcenter.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_ItemMaster.resx">
+      <DependentUpon>Form_ItemMaster.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_LoginList.resx">
       <DependentUpon>Form_LoginList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Part.resx">
+      <DependentUpon>Form_Part.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_PCList.resx">
       <DependentUpon>Form_PCList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Process.resx">
       <DependentUpon>Form_Process.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ProductPlan.resx">
+      <DependentUpon>Form_ProductPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_SubItem.resx">
+      <DependentUpon>Form_SubItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Userlist.resx">
       <DependentUpon>Form_Userlist.cs</DependentUpon>
@@ -125,6 +166,10 @@
       <DependentUpon>Form_Workcenter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Assambl\Assambl.csproj">

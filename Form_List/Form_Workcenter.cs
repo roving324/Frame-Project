@@ -27,11 +27,11 @@ namespace Form_List
 		private void Form_Workcenter_Load(object sender, EventArgs e)
 		{
 			_GridUtil.InitializeGrid(this.grid1);
-			_GridUtil.InitColumnUltraGrid(grid1, "PLANT_CD"   , "공장코드"  , true, GridColDataType_emu.VarChar, 80 , 80 , Infragistics.Win.HAlign.Right , false, false);
+			_GridUtil.InitColumnUltraGrid(grid1, "PLANT_CD"   , "공장코드"  , true, GridColDataType_emu.VarChar,  80 , 80 , Infragistics.Win.HAlign.Right , false, false);
 			_GridUtil.InitColumnUltraGrid(grid1, "PLANT_NM"   , "공장이름"  , true, GridColDataType_emu.VarChar, 160, 160, Infragistics.Win.HAlign.Right , true , false);
 			_GridUtil.InitColumnUltraGrid(grid1, "WC_NM"      , "작업장명"  , true, GridColDataType_emu.VarChar, 160, 160, Infragistics.Win.HAlign.Right , true , true);
 			_GridUtil.InitColumnUltraGrid(grid1, "WC_CD"      , "작업장코드", true, GridColDataType_emu.VarChar, 120, 120, Infragistics.Win.HAlign.Right , true , true);
-			_GridUtil.InitColumnUltraGrid(grid1, "USE_YN"     , "사용구분"  , true, GridColDataType_emu.VarChar, 80 , 80 , Infragistics.Win.HAlign.Center, true , true);
+			_GridUtil.InitColumnUltraGrid(grid1, "USE_YN"     , "사용구분"  , true, GridColDataType_emu.VarChar,  80 , 80 , Infragistics.Win.HAlign.Center, true , true);
 			_GridUtil.InitColumnUltraGrid(grid1, "CREATION_BY", "생성자"    , true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true , false);
 			_GridUtil.InitColumnUltraGrid(grid1, "UPDATE_BY"  , "수정자"    , true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true , false);
 			_GridUtil.SetInitUltraGridBind(grid1);
@@ -39,8 +39,8 @@ namespace Form_List
 
 			Mysql.Combo(cboPlantCd, "공장", "PLANT_NM", "TB_PLANT");
 			Mysql.Combo(cboUse    , "전체", "USE_YN"  , "TB_PLANT");
-			UltraGridUtil.SetComboUltraGrid(grid1, "PLANT_NM", Mysql.Combo("PLANT_CD","PLANT_NM", "TB_PLANT"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "USE_YN"  , Mysql.Combo("USE_YN","USE_YN", "TB_PLANT"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "PLANT_NM", Mysql.NCombo("PLANT_CD","PLANT_NM", "TB_PLANT"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "USE_YN"  , Mysql.NCombo("USE_YN","USE_YN", "TB_PLANT"));
 
 			this.grid1.DisplayLayout.Override.MergedCellContentArea               = MergedCellContentArea.VisibleRect;
 			this.grid1.DisplayLayout.Bands[0].Columns["PLANT_NM"].MergedCellStyle = MergedCellStyle.Always;
@@ -49,22 +49,29 @@ namespace Form_List
 
 		public override void DoInquire()
 		{
-			DBHelper helper = new DBHelper();
-			SqlDataAdapter Adapter = new SqlDataAdapter("PLANT_S", helper.sCon);
-
-			
-
-			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-			Adapter.SelectCommand.Parameters.AddWithValue("@PLANT"   , cboPlantCd.Value);
-			Adapter.SelectCommand.Parameters.AddWithValue("@WORKCODE", txtWcCd.Text);
-			Adapter.SelectCommand.Parameters.AddWithValue("@WORKNAME", txtWcCdNm.Text);
-			Adapter.SelectCommand.Parameters.AddWithValue("@USE"     , cboUse.Value);
+			try
+			{
+				DBHelper helper = new DBHelper();
+				SqlDataAdapter Adapter = new SqlDataAdapter("PLANT_S", helper.sCon);
 
 
-			DataTable dtTemp = new DataTable();
-			Adapter.Fill(dtTemp);
-			grid1.DataSource = dtTemp;
-			helper.Close();
+
+				Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+				Adapter.SelectCommand.Parameters.AddWithValue("@PLANT", cboPlantCd.Value);
+				Adapter.SelectCommand.Parameters.AddWithValue("@WORKCODE", txtWcCd.Text);
+				Adapter.SelectCommand.Parameters.AddWithValue("@WORKNAME", txtWcCdNm.Text);
+				Adapter.SelectCommand.Parameters.AddWithValue("@USE", cboUse.Value);
+
+
+				DataTable dtTemp = new DataTable();
+				Adapter.Fill(dtTemp);
+				grid1.DataSource = dtTemp;
+				helper.Close();
+			}
+			catch
+			{
+				MessageBox.Show("데이터가 존재하지 않습니다.");
+			}
 		}
 
 		private void grid1_ClickCell(object sender, Infragistics.Win.UltraWinGrid.ClickCellEventArgs e)

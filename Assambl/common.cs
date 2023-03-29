@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -27,9 +29,19 @@ namespace Assambl
 	public static class common
 	{
 		public const string sConn = "Data Source=222.235.141.8; Initial Catalog=KDTB_2JO; User ID= 2JO ; Password = 1234 ";
+		public const string sConn2 = "Data Source=222.235.141.8; Initial Catalog=KDTB_1JO; User ID= 1JO ; Password = 1234 ";
 		public static string sID = "";
 	}
 
+
+	// Transaction 사용법
+	// 테이블 첫 번째 컬럼은 int, 증가 컬럼 사용
+	// 아래에 있는 모든 주석 풀기
+	// DBHelper helper = new DBHelper(true)
+	// helper.open()
+	// helper.Transaction()
+	// helper.commit()
+	// helper.Rollback()
 
 	public class DBHelper
 	{
@@ -39,10 +51,10 @@ namespace Assambl
 		SqlTransaction sTran = null;
 		SqlCommand cmd = new SqlCommand();
 
-		public DBHelper(bool flag = false)
+		public DBHelper(bool flag = false,string SCon = common.sConn)
 		{
 			// 데이터 베이스 오픈.
-			sCon = new SqlConnection(common.sConn);
+			sCon = new SqlConnection(SCon);
 			sCon.Open();
 			if (flag)
 			{
@@ -51,36 +63,37 @@ namespace Assambl
 			}
 		}
 
+		// Insert,Update,Delete 만 사용
 		public void ExecuteNoneQuery(string query, params object[] parameters)
 		{
 			try
 			{
 				cmd.Connection = sCon;
-				cmd.CommandText = query;
-				cmd.CommandType = CommandType.StoredProcedure;
-				cmd.Parameters.Clear();
+				cmd.CommandText = query;                       // StoredProcedure 이름
+				cmd.CommandType = CommandType.StoredProcedure; // StoredProcedure 사용
+				cmd.Parameters.Clear();                        // 기존 파라메터 초기화
 				if (parameters != null)
 				{
-					string[] arry = Array.ConvertAll(parameters, p => (p ?? string.Empty).ToString());
+					string[] arry = Array.ConvertAll(parameters, p => (p ?? string.Empty).ToString()); // object[] => string[]로 변환 ,  p => (p ?? string.Empty).ToString() : 람다식
 					string[] sKey = new string[2];
 					for (int i = 0; i < arry.Length; i++)
 					{
-						sKey = arry[i].Split(',');
-						cmd.Parameters.Add(new SqlParameter(sKey[0].Substring(1), sKey[1].Substring(1, sKey[1].Length - 2)));
+						sKey = arry[i].Split(',');  // ("@ex", Value) 으로 나누기
+						cmd.Parameters.Add(new SqlParameter(sKey[0].Substring(1), sKey[1].Substring(1, sKey[1].Length - 2))); // sKey[0] : @ex, sKey[1] : Value
 					}
 				}
 				cmd.ExecuteNonQuery();
 			}
 			catch
 			{
-				MessageBox.Show("Error");
+				throw new Exception("Error");
 			}
 		}
-		 
+
 		public void Close()
 		{
 			// 데이터 베이스 종료
-			if (sCon.State == ConnectionState.Open) sCon.Close();
+			if (sCon.State == ConnectionState.Open) sCon.Close();  // 데이터 베이스 연결중 이면 닫기
 		}
 
 		public void Commit()
@@ -102,6 +115,8 @@ namespace Assambl
 				sTran = null;
 			}
 
+			// Rollback 기능 구현
+
 			//if (odtTemp != null && sTran)
 			//{
 			//	SqlConnection Connect = new SqlConnection(common.sConn);
@@ -118,6 +133,7 @@ namespace Assambl
 			//	Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 			//	foreach (DataRow rows in odtTemp.Rows)
 			//	{
+			//      // 타입에 따라 형변환 후 update 및 insert
 			//		for (int i = 0; i < rows.ItemArray.Length; i++)
 			//		{
 			//			if (rows[i].GetType() == value.GetType())
@@ -149,6 +165,8 @@ namespace Assambl
 			//	sTran = false;
 			//}
 		}
+
+		// Transaction : 기존 테이블 조회 후 datatable에 담아 저장해놓기, Rollback 시 저장 해놓은 데이터를 Insert 및 Update
 
 		//public void Transaction(string Table, string Columns)
 		//{
@@ -192,8 +210,9 @@ namespace Assambl
 
 	}
 
-	public class Mysql // 미완성
+	public class Mysql
 	{
+		// Dosave 미완성 : 아무 기능 없음
 		public void Dosave(Grid dgvGrid)
 		{
 			DBHelper helper = new DBHelper();
@@ -216,9 +235,10 @@ namespace Assambl
 			}
 		}
 
-		public static void Combo(UltraComboEditor Combobox, string KName, string DName, string Table, string VName = null )
+		// 콤보 박스 데이터 넣기
+		public static void Combo(UltraComboEditor Combobox, string KName, string DName, string Table, string VName = null ,string SCon = common.sConn)
 		{
-			SqlConnection Connect = new SqlConnection(common.sConn);
+			SqlConnection Connect = new SqlConnection(SCon);
 			// 데이터 베이스 오픈.
 			Connect.Open();
 			// 2. 품목유형 데이터 리스트 조회 SQL
@@ -229,6 +249,7 @@ namespace Assambl
 			sSqlSelect += $" SELECT {VName}                        AS VALUE   ";
 			sSqlSelect += $"       ,{DName}                        AS DISPLAY ";
 			sSqlSelect += $"   FROM {Table}  ) A                              ";
+			sSqlSelect += $"  WHERE A.VALUE IS NOT NULL                     ";
 			sSqlSelect += "    GROUP BY A.VALUE,A.DISPLAY                     ";
 			SqlDataAdapter adapter = new SqlDataAdapter(sSqlSelect, Connect);
 			DataTable dtTemp = new DataTable();
@@ -240,7 +261,7 @@ namespace Assambl
 			Connect.Close();
 		}
 
-		public static void Combo(UltraComboEditor Combobox, string KName, string EName, string Table, string Where, string Where2)
+		public static void Combo(UltraComboEditor Combobox, string KName, string EName, string Table, string Where, string Where2, string DName)
 		{
 			SqlConnection Connect = new SqlConnection(common.sConn);
 			// 데이터 베이스 오픈.
@@ -249,7 +270,7 @@ namespace Assambl
 			string sSqlSelect = $"SELECT * FROM( SELECT ''         AS VALUE   ";
 			sSqlSelect += $"                           ,'{KName}'  AS DISPLAY ";
 			sSqlSelect += " UNION ALL                                         ";
-			sSqlSelect += $" SELECT {EName}                        AS VALUE   ";
+			sSqlSelect += $" SELECT {DName}                        AS VALUE   ";
 			sSqlSelect += $"       ,{EName}                        AS DISPLAY ";
 			sSqlSelect += $"   FROM {Table} WHERE {Where2} = '{Where}' ) A    ";
 			sSqlSelect += "    GROUP BY A.VALUE,A.DISPLAY                     ";
@@ -263,18 +284,18 @@ namespace Assambl
 			Connect.Close();
 		}
 
-		public static DataTable Combo(string Name, string EName, string Table)
+		public static DataTable NCombo(string Name, string EName, string Table)
 		{
 			SqlConnection Connect = new SqlConnection(common.sConn);
 			// 데이터 베이스 오픈.
 			Connect.Open();
 			// 2. 품목유형 데이터 리스트 조회 SQL
 
-			string sSqlSelect = $" SELECT {Name} AS CODE_ID       ";
-			sSqlSelect += $"             ,{EName} AS CODE_NAME    ";
-			sSqlSelect += $"         FROM {Table}                    ";
-			sSqlSelect += $"          GROUP BY {Name},{EName}                 ";
-			sSqlSelect += "          ORDER BY CODE_ID                     ";
+			string sSqlSelect = $" SELECT {Name} AS CODE_ID    ";
+			sSqlSelect += $"             ,{EName} AS CODE_NAME ";
+			sSqlSelect += $"         FROM {Table}              ";
+			sSqlSelect += $"          GROUP BY {Name},{EName}  ";
+			sSqlSelect += "          ORDER BY CODE_ID          ";
 			SqlDataAdapter adapter = new SqlDataAdapter(sSqlSelect, Connect);
 			DataTable dtTemp = new DataTable();
 			adapter.Fill(dtTemp);
@@ -283,18 +304,18 @@ namespace Assambl
 		}
 
 
-		public static DataTable Combo(string Name, string EName, string Table, string Where, string Where2)
+		public static DataTable NCombo(string Name, string EName, string Table, string Where, string Where2)
 		{
 			SqlConnection Connect = new SqlConnection(common.sConn);
 			// 데이터 베이스 오픈.
 			Connect.Open();
 			// 2. 품목유형 데이터 리스트 조회 SQL
 
-			string sSqlSelect = $" SELECT {Name} AS CODE_ID";
-			sSqlSelect += $"             ,{EName} AS CODE_NAME";
-			sSqlSelect += $"   FROM {Table}   WHERE {Where2} = '{Where}'     ";
-			sSqlSelect += $"    GROUP BY {Name},{EName}                 ";
-			sSqlSelect += "    ORDER BY CODE_ID                     ";
+			string sSqlSelect = $" SELECT {Name} AS CODE_ID              ";
+			sSqlSelect += $"             ,{EName} AS CODE_NAME           ";
+			sSqlSelect += $"   FROM {Table}   WHERE {Where2} = '{Where}' ";
+			sSqlSelect += $"    GROUP BY {Name},{EName}                  ";
+			sSqlSelect += "    ORDER BY CODE_ID                          ";
 			SqlDataAdapter adapter = new SqlDataAdapter(sSqlSelect, Connect);
 			DataTable dtTemp = new DataTable();
 			adapter.Fill(dtTemp);
@@ -311,6 +332,37 @@ namespace Assambl
 			{
 				UltraButton btn = (UltraButton)ObBtn[i];
 				btn.Hide();
+			}
+		}
+
+		// 버튼 여부에 따라 메인화면에 출력
+		public static void btnShow(object[] oBtn,string title)
+		{
+			DBHelper helper = new DBHelper();
+			SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S", helper.sCon);
+			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+			Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", title);
+			DataTable dTtemp = new DataTable();
+			Adapter.Fill(dTtemp);
+			string[] btnNm = { "FIND", "NEW", "DLT", "SV", "RT" };
+			Dictionary<string, string> Mydic = new Dictionary<string, string>() { { "FIND", "조회" }, { "NEW", "추가" }, { "DLT", "삭제" }, { "SV", "저장" }, { "RT", "초기화" } };
+			int iShow = 0;
+			int iHide = 4;
+			for (int i = 0; i < Mydic.Count(); i++)
+			{
+
+				if (Convert.ToInt32(dTtemp.Rows[0][btnNm[i]]) == 1)
+				{
+					((UltraButton)oBtn[iShow]).Show();
+					((UltraButton)oBtn[iShow]).Text = Mydic[btnNm[i]].ToString(); // 버튼 텍스트 변경
+					iShow++;
+				}
+				else
+				{
+					// 미출력에 따라 뒤에서부터 숨기기
+					((UltraButton)oBtn[iHide]).Hide();
+					iHide--;
+				}
 			}
 		}
 	}

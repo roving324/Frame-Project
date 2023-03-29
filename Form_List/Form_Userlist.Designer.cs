@@ -43,18 +43,18 @@
 			Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
 			this.grid1 = new DC00_Component.Grid(this.components);
 			this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
+			this.cborank = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
+			this.cbopart = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
 			this.ultraLabel3 = new Infragistics.Win.Misc.UltraLabel();
 			this.ultraLabel2 = new Infragistics.Win.Misc.UltraLabel();
 			this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
 			this.name = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-			this.cbopart = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
-			this.cborank = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
 			((System.ComponentModel.ISupportInitialize)(this.grid1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).BeginInit();
 			this.ultraGroupBox1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.name)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.cbopart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.cborank)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.cbopart)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.name)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// grid1
@@ -154,6 +154,20 @@
 			this.ultraGroupBox1.Size = new System.Drawing.Size(800, 113);
 			this.ultraGroupBox1.TabIndex = 4;
 			// 
+			// cborank
+			// 
+			this.cborank.Location = new System.Drawing.Point(119, 62);
+			this.cborank.Name = "cborank";
+			this.cborank.Size = new System.Drawing.Size(144, 21);
+			this.cborank.TabIndex = 2;
+			// 
+			// cbopart
+			// 
+			this.cbopart.Location = new System.Drawing.Point(119, 35);
+			this.cbopart.Name = "cbopart";
+			this.cbopart.Size = new System.Drawing.Size(144, 21);
+			this.cbopart.TabIndex = 1;
+			// 
 			// ultraLabel3
 			// 
 			this.ultraLabel3.Location = new System.Drawing.Point(58, 64);
@@ -183,21 +197,7 @@
 			this.name.Location = new System.Drawing.Point(119, 12);
 			this.name.Name = "name";
 			this.name.Size = new System.Drawing.Size(144, 21);
-			this.name.TabIndex = 1;
-			// 
-			// cbopart
-			// 
-			this.cbopart.Location = new System.Drawing.Point(119, 35);
-			this.cbopart.Name = "cbopart";
-			this.cbopart.Size = new System.Drawing.Size(144, 21);
-			this.cbopart.TabIndex = 5;
-			// 
-			// cborank
-			// 
-			this.cborank.Location = new System.Drawing.Point(119, 62);
-			this.cborank.Name = "cborank";
-			this.cborank.Size = new System.Drawing.Size(144, 21);
-			this.cborank.TabIndex = 5;
+			this.name.TabIndex = 0;
 			// 
 			// Form_Userlist
 			// 
@@ -207,7 +207,6 @@
 			this.ControlBox = false;
 			this.Controls.Add(this.grid1);
 			this.Controls.Add(this.ultraGroupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "Form_Userlist";
 			this.Text = "Form_Userlist";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -216,9 +215,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).EndInit();
 			this.ultraGroupBox1.ResumeLayout(false);
 			this.ultraGroupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.name)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.cbopart)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cborank)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.cbopart)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.name)).EndInit();
 			this.ResumeLayout(false);
 
 		}

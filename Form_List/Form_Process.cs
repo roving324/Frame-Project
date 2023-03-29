@@ -43,15 +43,14 @@ namespace Form_List
 
 			_GridUtil.SetInitUltraGridBind(grid1);
 
-			Mysql.Combo(cboPlantCd, "전체", "PLANT_NM" , "TB_PLANT", "PLANT_CD");
-			Mysql.Combo(cboWcCd   , "전체", "WC_CD"    , "TB_WC");
+			Mysql.Combo(cboPlantCd, "공장", "PLANT_NM" , "TB_PLANT", "PLANT_CD");
+			Mysql.Combo(cboWcCd   , "작업장", "WC_CD"    , "TB_WC");
 			Mysql.Combo(cboUse    , "전체", "USE_YN"   , "TB_PLANT");
-			Mysql.Combo(cboWB     , "전체", "LWR_CD_NM", "TB_CODE_DTL", "LINE_TYPE", "UPR_CD");
-
-			UltraGridUtil.SetComboUltraGrid(grid1, "PLANT_NM", Mysql.Combo("PLANT_CD", "PLANT_NM", "TB_PLANT"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "WC_NM", Mysql.Combo("WC_CD", "WC_NM", "TB_WC"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "USE_YN", Mysql.Combo("USE_YN", "USE_YN", "TB_PLANT"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "LINE_TYPE_NM", Mysql.Combo("LWR_CD","LWR_CD_NM", "TB_CODE_DTL", "LINE_TYPE", "UPR_CD"));
+			Mysql.Combo(cboWB     , "전체", "LWR_CD_NM", "TB_CODE_DTL", "LINE_TYPE", "UPR_CD", "LWR_CD_NM");
+			UltraGridUtil.SetComboUltraGrid(grid1, "PLANT_NM"    , Mysql.NCombo("PLANT_CD", "PLANT_NM", "TB_PLANT"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "WC_NM"       , Mysql.NCombo("WC_CD", "WC_NM", "TB_WC"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "USE_YN"      , Mysql.NCombo("USE_YN", "USE_YN", "TB_PLANT"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "LINE_TYPE_NM", Mysql.NCombo("LWR_CD","LWR_CD_NM", "TB_CODE_DTL", "LINE_TYPE", "UPR_CD"));
 
 			this.grid1.DisplayLayout.Override.MergedCellContentArea               = MergedCellContentArea.VisibleRect;
 			this.grid1.DisplayLayout.Bands[0].Columns["PLANT_NM"].MergedCellStyle = MergedCellStyle.Always;

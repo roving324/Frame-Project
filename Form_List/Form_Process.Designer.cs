@@ -155,21 +155,21 @@
 			this.txtWB_Nm.Location = new System.Drawing.Point(340, 62);
 			this.txtWB_Nm.Name = "txtWB_Nm";
 			this.txtWB_Nm.Size = new System.Drawing.Size(144, 21);
-			this.txtWB_Nm.TabIndex = 1;
+			this.txtWB_Nm.TabIndex = 3;
 			// 
 			// txtRemark
 			// 
 			this.txtRemark.Location = new System.Drawing.Point(79, 99);
 			this.txtRemark.Name = "txtRemark";
 			this.txtRemark.Size = new System.Drawing.Size(405, 21);
-			this.txtRemark.TabIndex = 1;
+			this.txtRemark.TabIndex = 5;
 			// 
 			// txtWB_Cd
 			// 
 			this.txtWB_Cd.Location = new System.Drawing.Point(79, 62);
 			this.txtWB_Cd.Name = "txtWB_Cd";
 			this.txtWB_Cd.Size = new System.Drawing.Size(144, 21);
-			this.txtWB_Cd.TabIndex = 1;
+			this.txtWB_Cd.TabIndex = 2;
 			// 
 			// cboUse
 			// 
@@ -177,7 +177,7 @@
 			this.cboUse.Location = new System.Drawing.Point(556, 99);
 			this.cboUse.Name = "cboUse";
 			this.cboUse.Size = new System.Drawing.Size(144, 25);
-			this.cboUse.TabIndex = 0;
+			this.cboUse.TabIndex = 6;
 			// 
 			// cboWcCd
 			// 
@@ -185,7 +185,7 @@
 			this.cboWcCd.Location = new System.Drawing.Point(340, 12);
 			this.cboWcCd.Name = "cboWcCd";
 			this.cboWcCd.Size = new System.Drawing.Size(144, 23);
-			this.cboWcCd.TabIndex = 0;
+			this.cboWcCd.TabIndex = 1;
 			this.cboWcCd.TextRenderingMode = Infragistics.Win.TextRenderingMode.GDI;
 			// 
 			// cboWB
@@ -194,7 +194,7 @@
 			this.cboWB.Location = new System.Drawing.Point(556, 62);
 			this.cboWB.Name = "cboWB";
 			this.cboWB.Size = new System.Drawing.Size(144, 23);
-			this.cboWB.TabIndex = 0;
+			this.cboWB.TabIndex = 4;
 			this.cboWB.TextRenderingMode = Infragistics.Win.TextRenderingMode.GDI;
 			// 
 			// cboPlantCd
@@ -304,7 +304,6 @@
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.ultraGroupBox2);
 			this.Controls.Add(this.ultraGroupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "Form_Process";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Load += new System.EventHandler(this.Form_Process_Load);

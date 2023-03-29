@@ -38,7 +38,7 @@ namespace TestProject
 			if (dtTemp.Rows.Count > 0)
 			{
 				common.sID = dtTemp.Rows[0]["ID"].ToString();
-				base.Tag = true;
+				base.Tag = true;    // 로그인 확인 여부
 				this.Close();
 				MessageBox.Show("로그인 되었습니다.");
 				return;
@@ -56,7 +56,7 @@ namespace TestProject
 			base.Show();
 		}
 
-		private string GetLocalIP()
+		private string GetLocalIP() // IP 주소 가져오기
 		{
 			string myIP = "";
 			IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
@@ -133,9 +133,11 @@ namespace TestProject
 			}
 		}
 
+
+		// HTML 의 Placeholder 기능 구현
 		private void BeforeExitEditMode(object sender, Infragistics.Win.BeforeExitEditModeEventArgs e)
 		{
-			Infragistics.Win.UltraWinEditors.UltraTextEditor TextTitle = (Infragistics.Win.UltraWinEditors.UltraTextEditor)sender;
+			Infragistics.Win.UltraWinEditors.UltraTextEditor TextTitle = (Infragistics.Win.UltraWinEditors.UltraTextEditor)sender; // UltraTextEditor 로 객체화
 			if (TextTitle.Text == "")
 			{
 				if (TextTitle.Name == "ID")
@@ -146,13 +148,14 @@ namespace TestProject
 				else if (TextTitle.Name == "PW")
 				{
 					PW.Text = "PW";
-					PW.PasswordChar = default(char);
+					PW.PasswordChar = default(char);        // 패스워드문자 초기화('')
 					PW.Appearance.ForeColor = Color.Gray;
 				}
 
 			}
 		}
 
+		// HTML 의 Placeholder 기능 구현
 		private void BeforeEnterEditMode(object sender, CancelEventArgs e)
 		{
 			Infragistics.Win.UltraWinEditors.UltraTextEditor TextTitle = (Infragistics.Win.UltraWinEditors.UltraTextEditor)sender;

@@ -68,7 +68,7 @@
 			this.txtWcCd.Location = new System.Drawing.Point(267, 25);
 			this.txtWcCd.Name = "txtWcCd";
 			this.txtWcCd.Size = new System.Drawing.Size(100, 21);
-			this.txtWcCd.TabIndex = 2;
+			this.txtWcCd.TabIndex = 1;
 			// 
 			// txtWcCdNm
 			// 
@@ -99,7 +99,7 @@
 			this.cboUse.Location = new System.Drawing.Point(622, 24);
 			this.cboUse.Name = "cboUse";
 			this.cboUse.Size = new System.Drawing.Size(92, 23);
-			this.cboUse.TabIndex = 5;
+			this.cboUse.TabIndex = 3;
 			this.cboUse.TextRenderingMode = Infragistics.Win.TextRenderingMode.GDI;
 			// 
 			// cboPlantCd
@@ -108,7 +108,7 @@
 			this.cboPlantCd.Location = new System.Drawing.Point(76, 24);
 			this.cboPlantCd.Name = "cboPlantCd";
 			this.cboPlantCd.Size = new System.Drawing.Size(107, 23);
-			this.cboPlantCd.TabIndex = 5;
+			this.cboPlantCd.TabIndex = 0;
 			this.cboPlantCd.TextRenderingMode = Infragistics.Win.TextRenderingMode.GDI;
 			// 
 			// ultraLabel4
@@ -241,7 +241,6 @@
 			this.ClientSize = new System.Drawing.Size(886, 450);
 			this.Controls.Add(this.ultraGroupBox2);
 			this.Controls.Add(this.ultraGroupBox1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 			this.Name = "Form_Workcenter";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.Load += new System.EventHandler(this.Form_Workcenter_Load);

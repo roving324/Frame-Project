@@ -34,9 +34,9 @@ namespace TestProject
 		{
 			this.components = new System.ComponentModel.Container();
 			Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
+			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode1 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
+			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode2 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
 			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode3 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
-			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode4 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
-			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode13 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
 			Infragistics.Win.UltraWinTree.Override _override1 = new Infragistics.Win.UltraWinTree.Override();
 			Infragistics.Win.UltraWinScrollBar.ScrollBarLook scrollBarLook1 = new Infragistics.Win.UltraWinScrollBar.ScrollBarLook();
 			Infragistics.Win.UltraWinEditors.EditorButton editorButton1 = new Infragistics.Win.UltraWinEditors.EditorButton("collapse");
@@ -72,10 +72,10 @@ namespace TestProject
 			Infragistics.Win.UltraWinDock.DockAreaPane dockAreaPane6 = new Infragistics.Win.UltraWinDock.DockAreaPane(Infragistics.Win.UltraWinDock.DockedLocation.DockedRight, new System.Guid("4f140a23-ee74-440b-afdd-723d9d8c489c"));
 			Infragistics.Win.UltraWinDock.DockableControlPane dockableControlPane6 = new Infragistics.Win.UltraWinDock.DockableControlPane(new System.Guid("f7d8b770-ffb2-44c4-8439-50458a1c7f4c"), new System.Guid("00000000-0000-0000-0000-000000000000"), -1, new System.Guid("4f140a23-ee74-440b-afdd-723d9d8c489c"), -1);
 			Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
-			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode9 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
-			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode10 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
-			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode11 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
-			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode12 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
+			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode4 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
+			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode5 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
+			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode6 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
+			Infragistics.Win.UltraWinTree.UltraTreeNode ultraTreeNode7 = new Infragistics.Win.UltraWinTree.UltraTreeNode();
 			Infragistics.Win.UltraWinTree.Override _override2 = new Infragistics.Win.UltraWinTree.Override();
 			Infragistics.Win.UltraWinScrollBar.ScrollBarLook scrollBarLook2 = new Infragistics.Win.UltraWinScrollBar.ScrollBarLook();
 			Infragistics.Win.UltraWinEditors.EditorButton editorButton3 = new Infragistics.Win.UltraWinEditors.EditorButton("collapse");
@@ -157,12 +157,12 @@ namespace TestProject
 			this._Form_HomeUnpinnedTabAreaTop = new Infragistics.Win.UltraWinDock.UnpinnedTabArea();
 			this._Form_HomeUnpinnedTabAreaBottom = new Infragistics.Win.UltraWinDock.UnpinnedTabArea();
 			this._Form_HomeAutoHideControl = new Infragistics.Win.UltraWinDock.AutoHideControl();
-			this.dockableWindow3 = new Infragistics.Win.UltraWinDock.DockableWindow();
-			this.dockableWindow6 = new Infragistics.Win.UltraWinDock.DockableWindow();
-			this.dockableWindow5 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow1 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow2 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow4 = new Infragistics.Win.UltraWinDock.DockableWindow();
+			this.dockableWindow3 = new Infragistics.Win.UltraWinDock.DockableWindow();
+			this.dockableWindow6 = new Infragistics.Win.UltraWinDock.DockableWindow();
+			this.dockableWindow5 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
 			this.treMenu = new Infragistics.Win.UltraWinTree.UltraTree();
 			this.txtSearch = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -232,12 +232,12 @@ namespace TestProject
 			this.ultraGroupBox4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
 			this._Form_HomeAutoHideControl.SuspendLayout();
-			this.dockableWindow3.SuspendLayout();
-			this.dockableWindow6.SuspendLayout();
-			this.dockableWindow5.SuspendLayout();
 			this.dockableWindow1.SuspendLayout();
 			this.dockableWindow2.SuspendLayout();
 			this.dockableWindow4.SuspendLayout();
+			this.dockableWindow3.SuspendLayout();
+			this.dockableWindow6.SuspendLayout();
+			this.dockableWindow5.SuspendLayout();
 			this.ultraPanel1.ClientArea.SuspendLayout();
 			this.ultraPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.treMenu)).BeginInit();
@@ -261,7 +261,7 @@ namespace TestProject
 			this.ultraPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ultraPanel2.Location = new System.Drawing.Point(0, 18);
 			this.ultraPanel2.Name = "ultraPanel2";
-			this.ultraPanel2.Size = new System.Drawing.Size(183, 563);
+			this.ultraPanel2.Size = new System.Drawing.Size(298, 625);
 			this.ultraPanel2.TabIndex = 12;
 			// 
 			// Menu
@@ -282,20 +282,20 @@ namespace TestProject
 			this.Menu.Margin = new System.Windows.Forms.Padding(3, 16, 3, 2);
 			this.Menu.Name = "Menu";
 			this.Menu.NodeConnectorColor = System.Drawing.SystemColors.ControlDark;
-			ultraTreeNode3.Key = "기준정보";
-			ultraTreeNode3.Text = "기준정보";
-			ultraTreeNode13.Text = "로그인 이력";
-			ultraTreeNode4.Nodes.AddRange(new Infragistics.Win.UltraWinTree.UltraTreeNode[] {
-            ultraTreeNode13});
-			ultraTreeNode4.Text = "직원 관리";
+			ultraTreeNode1.Key = "기준정보";
+			ultraTreeNode1.Text = "기준정보";
+			ultraTreeNode3.Text = "로그인 이력";
+			ultraTreeNode2.Nodes.AddRange(new Infragistics.Win.UltraWinTree.UltraTreeNode[] {
+            ultraTreeNode3});
+			ultraTreeNode2.Text = "직원 관리";
 			this.Menu.Nodes.AddRange(new Infragistics.Win.UltraWinTree.UltraTreeNode[] {
-            ultraTreeNode3,
-            ultraTreeNode4});
+            ultraTreeNode1,
+            ultraTreeNode2});
 			_override1.ShowColumns = Infragistics.Win.DefaultableBoolean.False;
 			this.Menu.Override = _override1;
 			scrollBarLook1.ViewStyle = Infragistics.Win.UltraWinScrollBar.ScrollBarViewStyle.Office2010;
 			this.Menu.ScrollBarLook = scrollBarLook1;
-			this.Menu.Size = new System.Drawing.Size(183, 70);
+			this.Menu.Size = new System.Drawing.Size(298, 132);
 			this.Menu.TabIndex = 73;
 			this.Menu.UpdateMode = Infragistics.Win.UltraWinTree.UpdateMode.OnActiveNodeChange;
 			this.Menu.ViewStyle = Infragistics.Win.UltraWinTree.ViewStyle.Standard;
@@ -310,7 +310,7 @@ namespace TestProject
 			this.GBPC.Dock = System.Windows.Forms.DockStyle.Top;
 			this.GBPC.Location = new System.Drawing.Point(0, 183);
 			this.GBPC.Name = "GBPC";
-			this.GBPC.Size = new System.Drawing.Size(183, 73);
+			this.GBPC.Size = new System.Drawing.Size(298, 73);
 			this.GBPC.TabIndex = 101;
 			// 
 			// BtnPC2
@@ -319,7 +319,7 @@ namespace TestProject
 			this.BtnPC2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.BtnPC2.Location = new System.Drawing.Point(51, 27);
 			this.BtnPC2.Name = "BtnPC2";
-			this.BtnPC2.Size = new System.Drawing.Size(131, 45);
+			this.BtnPC2.Size = new System.Drawing.Size(246, 45);
 			this.BtnPC2.TabIndex = 1;
 			this.BtnPC2.Text = "PC 2";
 			this.BtnPC2.UseVisualStyleBackColor = true;
@@ -355,7 +355,7 @@ namespace TestProject
 			this.ultraTextEditor1.Location = new System.Drawing.Point(1, 0);
 			this.ultraTextEditor1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ultraTextEditor1.Name = "ultraTextEditor1";
-			this.ultraTextEditor1.Size = new System.Drawing.Size(181, 27);
+			this.ultraTextEditor1.Size = new System.Drawing.Size(296, 27);
 			this.ultraTextEditor1.TabIndex = 72;
 			// 
 			// GBsubProfil
@@ -367,7 +367,7 @@ namespace TestProject
 			this.GBsubProfil.Dock = System.Windows.Forms.DockStyle.Top;
 			this.GBsubProfil.Location = new System.Drawing.Point(0, 0);
 			this.GBsubProfil.Name = "GBsubProfil";
-			this.GBsubProfil.Size = new System.Drawing.Size(183, 183);
+			this.GBsubProfil.Size = new System.Drawing.Size(298, 183);
 			this.GBsubProfil.TabIndex = 102;
 			// 
 			// txtPH
@@ -375,7 +375,7 @@ namespace TestProject
 			this.txtPH.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.txtPH.Location = new System.Drawing.Point(1, 156);
 			this.txtPH.Name = "txtPH";
-			this.txtPH.Size = new System.Drawing.Size(181, 26);
+			this.txtPH.Size = new System.Drawing.Size(296, 26);
 			this.txtPH.TabIndex = 2;
 			this.txtPH.Text = "PH";
 			// 
@@ -385,7 +385,7 @@ namespace TestProject
 			this.txtName.Location = new System.Drawing.Point(1, 134);
 			this.txtName.Name = "txtName";
 			this.txtName.Padding = new System.Drawing.Size(0, 5);
-			this.txtName.Size = new System.Drawing.Size(181, 22);
+			this.txtName.Size = new System.Drawing.Size(296, 22);
 			this.txtName.TabIndex = 2;
 			this.txtName.Text = "Name";
 			// 
@@ -395,7 +395,7 @@ namespace TestProject
 			this.subPictureBox.Dock = System.Windows.Forms.DockStyle.Top;
 			this.subPictureBox.Location = new System.Drawing.Point(1, 0);
 			this.subPictureBox.Name = "subPictureBox";
-			this.subPictureBox.Size = new System.Drawing.Size(181, 134);
+			this.subPictureBox.Size = new System.Drawing.Size(296, 134);
 			this.subPictureBox.TabIndex = 2;
 			// 
 			// GBEXIT
@@ -405,9 +405,9 @@ namespace TestProject
 			this.GBEXIT.Controls.Add(this.BtnExit);
 			this.GBEXIT.Controls.Add(this.BtnLogout);
 			this.GBEXIT.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.GBEXIT.Location = new System.Drawing.Point(0, 326);
+			this.GBEXIT.Location = new System.Drawing.Point(0, 388);
 			this.GBEXIT.Name = "GBEXIT";
-			this.GBEXIT.Size = new System.Drawing.Size(183, 237);
+			this.GBEXIT.Size = new System.Drawing.Size(298, 237);
 			this.GBEXIT.TabIndex = 74;
 			// 
 			// NowTime
@@ -691,6 +691,8 @@ namespace TestProject
 			this.txtPPPW.RequirePop = DC00_Component.STextBox.RequireFlagEnum.NO;
 			this.txtPPPW.Size = new System.Drawing.Size(131, 21);
 			this.txtPPPW.TabIndex = 38;
+			this.txtPPPW.BeforeEnterEditMode += new System.ComponentModel.CancelEventHandler(this.txtPPPW_BeforeEnterEditMode);
+			this.txtPPPW.BeforeExitEditMode += new Infragistics.Win.BeforeExitEditModeEventHandler(this.txtPPPW_BeforeExitEditMode);
 			// 
 			// txtPLevel
 			// 
@@ -1202,71 +1204,71 @@ namespace TestProject
 			// 
 			// _Form_HomeAutoHideControl
 			// 
-			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow6);
-			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow5);
-			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow1);
 			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow2);
 			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow4);
+			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow3);
+			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow6);
+			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow5);
 			this._Form_HomeAutoHideControl.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this._Form_HomeAutoHideControl.Location = new System.Drawing.Point(283, 0);
+			this._Form_HomeAutoHideControl.Location = new System.Drawing.Point(21, 0);
 			this._Form_HomeAutoHideControl.Name = "_Form_HomeAutoHideControl";
 			this._Form_HomeAutoHideControl.Owner = this.dockManager;
-			this._Form_HomeAutoHideControl.Size = new System.Drawing.Size(891, 643);
+			this._Form_HomeAutoHideControl.Size = new System.Drawing.Size(254, 643);
 			this._Form_HomeAutoHideControl.TabIndex = 9;
-			// 
-			// dockableWindow3
-			// 
-			this.dockableWindow3.Controls.Add(this.ultraPanel2);
-			this.dockableWindow3.Location = new System.Drawing.Point(0, 0);
-			this.dockableWindow3.Name = "dockableWindow3";
-			this.dockableWindow3.Owner = this.dockManager;
-			this.dockableWindow3.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow3.TabIndex = 31;
-			// 
-			// dockableWindow6
-			// 
-			this.dockableWindow6.Controls.Add(this.ultraTilePanel1);
-			this.dockableWindow6.Location = new System.Drawing.Point(-10000, 0);
-			this.dockableWindow6.Name = "dockableWindow6";
-			this.dockableWindow6.Owner = this.dockManager;
-			this.dockableWindow6.Size = new System.Drawing.Size(225, 643);
-			this.dockableWindow6.TabIndex = 32;
-			// 
-			// dockableWindow5
-			// 
-			this.dockableWindow5.Controls.Add(this.GBCalendar);
-			this.dockableWindow5.Location = new System.Drawing.Point(0, 0);
-			this.dockableWindow5.Name = "dockableWindow5";
-			this.dockableWindow5.Owner = this.dockManager;
-			this.dockableWindow5.Size = new System.Drawing.Size(249, 643);
-			this.dockableWindow5.TabIndex = 33;
 			// 
 			// dockableWindow1
 			// 
-			this.dockableWindow1.Controls.Add(this.GBProfil);
+			this.dockableWindow1.Controls.Add(this.ultraPanel2);
 			this.dockableWindow1.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow1.Name = "dockableWindow1";
 			this.dockableWindow1.Owner = this.dockManager;
-			this.dockableWindow1.Size = new System.Drawing.Size(298, 643);
-			this.dockableWindow1.TabIndex = 34;
+			this.dockableWindow1.Size = new System.Drawing.Size(183, 643);
+			this.dockableWindow1.TabIndex = 31;
 			// 
 			// dockableWindow2
 			// 
-			this.dockableWindow2.Controls.Add(this.ultraGroupBox5);
+			this.dockableWindow2.Controls.Add(this.ultraTilePanel1);
 			this.dockableWindow2.Location = new System.Drawing.Point(-10000, 0);
 			this.dockableWindow2.Name = "dockableWindow2";
 			this.dockableWindow2.Owner = this.dockManager;
 			this.dockableWindow2.Size = new System.Drawing.Size(886, 643);
-			this.dockableWindow2.TabIndex = 35;
+			this.dockableWindow2.TabIndex = 32;
 			// 
 			// dockableWindow4
 			// 
-			this.dockableWindow4.Controls.Add(this.GBPanel2);
+			this.dockableWindow4.Controls.Add(this.GBCalendar);
 			this.dockableWindow4.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow4.Name = "dockableWindow4";
 			this.dockableWindow4.Owner = this.dockManager;
-			this.dockableWindow4.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow4.TabIndex = 36;
+			this.dockableWindow4.Size = new System.Drawing.Size(249, 643);
+			this.dockableWindow4.TabIndex = 33;
+			// 
+			// dockableWindow3
+			// 
+			this.dockableWindow3.Controls.Add(this.GBProfil);
+			this.dockableWindow3.Location = new System.Drawing.Point(0, 0);
+			this.dockableWindow3.Name = "dockableWindow3";
+			this.dockableWindow3.Owner = this.dockManager;
+			this.dockableWindow3.Size = new System.Drawing.Size(183, 643);
+			this.dockableWindow3.TabIndex = 34;
+			// 
+			// dockableWindow6
+			// 
+			this.dockableWindow6.Controls.Add(this.ultraGroupBox5);
+			this.dockableWindow6.Location = new System.Drawing.Point(0, 0);
+			this.dockableWindow6.Name = "dockableWindow6";
+			this.dockableWindow6.Owner = this.dockManager;
+			this.dockableWindow6.Size = new System.Drawing.Size(183, 643);
+			this.dockableWindow6.TabIndex = 35;
+			// 
+			// dockableWindow5
+			// 
+			this.dockableWindow5.Controls.Add(this.GBPanel2);
+			this.dockableWindow5.Location = new System.Drawing.Point(0, 0);
+			this.dockableWindow5.Name = "dockableWindow5";
+			this.dockableWindow5.Owner = this.dockManager;
+			this.dockableWindow5.Size = new System.Drawing.Size(183, 643);
+			this.dockableWindow5.TabIndex = 36;
 			// 
 			// ultraPanel1
 			// 
@@ -1299,16 +1301,16 @@ namespace TestProject
 			this.treMenu.Margin = new System.Windows.Forms.Padding(3, 16, 3, 2);
 			this.treMenu.Name = "treMenu";
 			this.treMenu.NodeConnectorColor = System.Drawing.SystemColors.ControlDark;
-			ultraTreeNode10.Text = "공통 기준정보";
-			ultraTreeNode11.Text = "작업자 관리";
-			ultraTreeNode12.Text = "사용자 관리";
-			ultraTreeNode9.Nodes.AddRange(new Infragistics.Win.UltraWinTree.UltraTreeNode[] {
-            ultraTreeNode10,
-            ultraTreeNode11,
-            ultraTreeNode12});
-			ultraTreeNode9.Text = "기준정보";
+			ultraTreeNode5.Text = "공통 기준정보";
+			ultraTreeNode6.Text = "작업자 관리";
+			ultraTreeNode7.Text = "사용자 관리";
+			ultraTreeNode4.Nodes.AddRange(new Infragistics.Win.UltraWinTree.UltraTreeNode[] {
+            ultraTreeNode5,
+            ultraTreeNode6,
+            ultraTreeNode7});
+			ultraTreeNode4.Text = "기준정보";
 			this.treMenu.Nodes.AddRange(new Infragistics.Win.UltraWinTree.UltraTreeNode[] {
-            ultraTreeNode9});
+            ultraTreeNode4});
 			_override2.ShowColumns = Infragistics.Win.DefaultableBoolean.False;
 			this.treMenu.Override = _override2;
 			scrollBarLook2.ViewStyle = Infragistics.Win.UltraWinScrollBar.ScrollBarViewStyle.Office2010;
@@ -1341,7 +1343,7 @@ namespace TestProject
 			// 
 			// windowDockingArea1
 			// 
-			this.windowDockingArea1.Controls.Add(this.dockableWindow3);
+			this.windowDockingArea1.Controls.Add(this.dockableWindow1);
 			this.windowDockingArea1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.windowDockingArea1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
 			this.windowDockingArea1.Location = new System.Drawing.Point(21, 0);
@@ -1596,12 +1598,12 @@ namespace TestProject
 			this.ultraGroupBox4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
 			this._Form_HomeAutoHideControl.ResumeLayout(false);
-			this.dockableWindow3.ResumeLayout(false);
-			this.dockableWindow6.ResumeLayout(false);
-			this.dockableWindow5.ResumeLayout(false);
 			this.dockableWindow1.ResumeLayout(false);
 			this.dockableWindow2.ResumeLayout(false);
 			this.dockableWindow4.ResumeLayout(false);
+			this.dockableWindow3.ResumeLayout(false);
+			this.dockableWindow6.ResumeLayout(false);
+			this.dockableWindow5.ResumeLayout(false);
 			this.ultraPanel1.ClientArea.ResumeLayout(false);
 			this.ultraPanel1.ClientArea.PerformLayout();
 			this.ultraPanel1.ResumeLayout(false);

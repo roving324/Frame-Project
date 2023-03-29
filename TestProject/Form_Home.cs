@@ -22,6 +22,7 @@ using System.Messaging;
 using Infragistics.Documents.Reports.RTF.Defs;
 using Telerik.WinControls.UI;
 using System.Threading;
+using System.Runtime.Remoting.Messaging;
 
 namespace TestProject
 {
@@ -31,33 +32,35 @@ namespace TestProject
 
 		public Form_Home()
 		{
+			// 로그인 화면 출력
 			Form_Login login = new Form_Login();
 			login.ShowDialog();
-			if (!Convert.ToBoolean(login.Tag))
+			if (!Convert.ToBoolean(login.Tag)) // 로그인 여부 확인
 			{
 				Environment.Exit(0);
 			}
 			InitializeComponent();
-			Form_Load(true);
+			Form_Load(true); // 폼 초기화
 			this.Show();
 		}
 
 		private void Home_Load(object sender = null, EventArgs e = null)
 		{
 			DBHelper helper = new DBHelper();
-			GBPanel.Size = new Size(this.Width*2/3, this.Height*2/3);
-			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset);
+			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset); // 버튼 hide()
 			MainName.Text = "메인화면";
 			GBPanel2.Hide();
 			picture();
 			profil();
-			// 메뉴 조회
+
+			// 아이디에 해당하는 부서 조회 후 메뉴 Tree 부서에 따른 목록 조회
 			SqlDataAdapter Adapter = new SqlDataAdapter("MENU_S", helper.sCon);
 			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 			Adapter.SelectCommand.Parameters.AddWithValue("@ID", common.sID);
 			DataTable dtTemp = new DataTable();
 			Adapter.Fill(dtTemp);
 			Menu.Nodes.Clear();
+
 			for (int i = 0; i < dtTemp.Rows.Count; i++)
 			{
 				string title = Convert.ToString(dtTemp.Rows[i]["MENU"]);
@@ -67,6 +70,7 @@ namespace TestProject
 					Menu.Nodes.Add(title, title); // 메뉴 타이틀이 없을 경우 추가
 				}
 				
+				// 타이틀이 있을 경우 하위 목록으로 추가
 				string subtitle = Convert.ToString(dtTemp.Rows[i]["TITLE"]);
 				Menu.Nodes[title].Nodes.Add("", subtitle); // 소제목 ( "" = name, subtitle = text)
 			}
@@ -122,7 +126,7 @@ namespace TestProject
 				Form Test		  = null;
 				
 
-				if (reset)
+				if (reset) // Close 버튼 클릭 시 화면 초기화
 				{
 					if (PC2.Controls.Count > 0) PC2.Controls.RemoveAt(0);
 					assembly = Assembly.LoadFrom(Application.StartupPath + @"\" + "Assambl.DLL");
@@ -135,32 +139,20 @@ namespace TestProject
 					dockManager.DockAreas[5].Panes[0].Text = "보조화면";
 					return;
 				}
+				// Form 불러오기
 				assembly = Assembly.LoadFrom(Application.StartupPath + @"\" + "Form_List.DLL");
 				typeForm = assembly.GetType("Form_List." + name, true);
 				Test = (Form)Activator.CreateInstance(typeForm);
 				Test.TopLevel = false;
 				if (BtnPC1.Checked)
 				{
-					if (PC1.Controls.Count > 0) PC1.Controls.RemoveAt(0);
-					PC1.Controls.Add(Test);
-					Test.Show();
-					SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S", helper.sCon);
-					Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-					Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", title);
-					DataTable dTtemp = new DataTable();
-					Adapter.Fill(dTtemp);
-					if (Convert.ToInt32(dTtemp.Rows[0]["FIND"]) == 1) btnFind.Show();
-					else btnFind.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["NEW"]) == 1) btnNew.Show();
-					else btnNew.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["DLT"]) == 1) btnDelete.Show();
-					else btnDelete.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["SV"]) == 1) btnSave.Show();
-					else btnSave.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["RT"]) == 1) BtnReset.Show();
-					else BtnReset.Hide();
+					if (PC1.Controls.Count > 0) PC1.Controls.RemoveAt(0); // 기존 화면 제거
+					PC1.Controls.Add(Test); // 화면 추가
+					Test.Show();            // 화면 출력
+					object[] oBtn = { btnFind, btnNew, btnDelete, btnSave, BtnReset };
+					Btn.btnShow(oBtn, title); // 권한있는 버튼만 출력
 					btnClose.Show();
-					btnClose.BringToFront(); // 맨 앞으로
+					btnClose.BringToFront(); // 위치 화면 맨 앞으로
 					MainName.Text = title;
 				}
 				else
@@ -168,22 +160,8 @@ namespace TestProject
 					if (PC2.Controls.Count > 0) PC2.Controls.RemoveAt(0);
 					PC2.Controls.Add(Test);
 					Test.Show();
-
-					SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S", helper.sCon);
-					Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-					Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", title);
-					DataTable dTtemp = new DataTable();
-					Adapter.Fill(dTtemp);
-					if (Convert.ToInt32(dTtemp.Rows[0]["FIND"]) == 1) btnsubFind.Show();
-					else btnsubFind.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["NEW"]) == 1) btnsubNew.Show();
-					else btnsubNew.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["DLT"]) == 1) btnsubDelete.Show();
-					else btnsubDelete.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["SV"]) == 1) btnsubSave.Show();
-					else btnsubSave.Hide();
-					if (Convert.ToInt32(dTtemp.Rows[0]["RT"]) == 1) BtnSubReset.Show();
-					else BtnSubReset.Hide();
+					object[] oBtn = { btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset };
+					Btn.btnShow(oBtn, title);
 					btnsubClose.Show();
 					btnClose.BringToFront();
 					GBPanel2.Show();
@@ -244,25 +222,31 @@ namespace TestProject
 
 		private void Form_Home_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (MessageBox.Show("로그아웃 하시겠습니까?", "로그아웃", MessageBoxButtons.YesNo) == DialogResult.Yes)
+			if (MessageBox.Show("프로그램을 종료하시겠습니까?", "프로그램 종료", MessageBoxButtons.YesNo) == DialogResult.Yes)
 			{
-				DBHelper helper = new DBHelper();
-				helper.ExecuteNoneQuery("LoginList_U", ("@ID", common.sID));
-				helper.Close();
-				Environment.Exit(0);
+				if (MessageBox.Show("로그아웃 하시겠습니까?", "로그아웃", MessageBoxButtons.YesNo) == DialogResult.Yes)
+				{
+					DBHelper helper = new DBHelper();
+					helper.ExecuteNoneQuery("LoginList_U", ("@ID", common.sID));
+					helper.Close();
+					Environment.Exit(0);
+				}
+				else
+				{
+					this.Cursor = Cursors.WaitCursor; // 커서 모양 변경
+					Environment.Exit(0);
+				}
 			}
-			else
-			{
-				this.Cursor = Cursors.WaitCursor;
-				Environment.Exit(0);
-			}
+			else e.Cancel = true; // 프로그램 종료 취소
 		}
 
 		private void Menu_AfterActivate(object sender, Infragistics.Win.UltraWinTree.NodeEventArgs e = null)
 		{
 			DBHelper helper = new DBHelper();
 			Infragistics.Win.UltraWinTree.UltraTree Name = (Infragistics.Win.UltraWinTree.UltraTree)sender;
-			string name = Name.ActiveNode.Text;
+			string name = Name.ActiveNode.Text; // 활성화 된 하위 목록 텍스트 담기
+
+			// 메뉴에 따른 화면 여부 확인
 			SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S", helper.sCon);
 			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 			Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", name);
@@ -276,7 +260,7 @@ namespace TestProject
 
 		private void GBPanel_Resize(object sender = null, EventArgs e = null)
 		{
-			// 화면 사이즈 조절 1. 화면 담기 2. 기존화면 지우기 3. 틀 생성 4. 다시 담기 5. 보여주기
+			// 화면 사이즈 조절 : 1. 화면 담기 2. 기존화면 지우기 3. 틀 생성 4. 다시 담기 5. 보여주기
 			if (PC1.Controls.Count > 0)
 			{
 				Form Temp = (Form)PC1.Controls[0];
@@ -455,7 +439,7 @@ namespace TestProject
 		{
 			Infragistics.Win.Misc.UltraButton btn = (Infragistics.Win.Misc.UltraButton)sender;
 			Base_Form Child = null;
-			if (btn.Parent.Parent.Controls[1].Name == "PC1") Child = (Base_Form)PC1.Controls[0];
+			if (btn.Parent.Parent.Controls[1].Name == "PC1") Child = (Base_Form)PC1.Controls[0]; // 버튼이 있는 화면 위치 btn.Parent.Parent.Controls[1]
 			else if (btn.Parent.Parent.Controls[0].Name == "PC2") Child = (Base_Form)PC2.Controls[0];
 
 
@@ -686,7 +670,7 @@ namespace TestProject
 					profil();
 					return;
 				}
-				helper.ExecuteNoneQuery("Profil_U1", ("@ID", ID), ("@Name", Name), ("@PHONE", Phone), ("@SEX", SEX)
+				helper.ExecuteNoneQuery("Profil_U", ("@ID", ID), ("@Name", Name), ("@PHONE", Phone), ("@SEX", SEX)
 												   , ("@PART", PART), ("@RANK", RANK), ("@PW", Pw));
 
 				MessageBox.Show("정상적으로 수정을 완료 하였습니다.");
@@ -706,6 +690,25 @@ namespace TestProject
 		{
 			txtMesinger.SelectionStart = txtMesinger.Text.Length;
 			txtMesinger.ScrollToCaret();
+		}
+
+		private void txtPPPW_BeforeEnterEditMode(object sender, CancelEventArgs e)
+		{
+			if (txtPPPW.Text == "비밀번호") 
+			{ 
+				txtPPPW.Text = "";
+				txtPPPW.PasswordChar = '*';
+			}
+
+		}
+
+		private void txtPPPW_BeforeExitEditMode(object sender, BeforeExitEditModeEventArgs e)
+		{
+			if (txtPPPW.Text == "")
+			{
+				txtPPPW.Text = "비밀번호";
+				txtPPPW.PasswordChar = default(char);
+			}
 		}
 	}
 }
