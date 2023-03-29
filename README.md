@@ -29,3 +29,30 @@ public void ExecuteNoneQuery(string query, params object[] parameters)
 	}
 }
 ```
+
+## 목록 조회
+
+```
+// 아이디에 해당하는 부서 조회 후 메뉴 Tree 부서에 따른 목록 조회
+SqlDataAdapter Adapter = new SqlDataAdapter("MENU_S", helper.sCon);
+Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+Adapter.SelectCommand.Parameters.AddWithValue("@ID", common.sID);
+DataTable dtTemp = new DataTable();
+Adapter.Fill(dtTemp);
+Menu.Nodes.Clear();
+for (int i = 0; i < dtTemp.Rows.Count; i++)
+{
+	string title = Convert.ToString(dtTemp.Rows[i]["MENU"]);
+	
+	if (Menu.GetNodeByKey(title) == null)
+	{
+		Menu.Nodes.Add(title, title); // 메뉴 타이틀이 없을 경우 추가
+	}
+	
+	// 타이틀이 있을 경우 하위 목록으로 추가
+	string subtitle = Convert.ToString(dtTemp.Rows[i]["TITLE"]);
+	Menu.Nodes[title].Nodes.Add("", subtitle); // 소제목 ( "" = name, subtitle = text)
+}
+Calendar_DateChanged(); // 로드시 일정 바로 조회
+helper.Close();
+```
