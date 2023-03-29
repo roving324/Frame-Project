@@ -344,10 +344,10 @@ namespace Assambl
 			Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", title);
 			DataTable dTtemp = new DataTable();
 			Adapter.Fill(dTtemp);
-			string[] btnNm = { "FIND", "NEW", "DLT", "SV", "RT" };
-			Dictionary<string, string> Mydic = new Dictionary<string, string>() { { "FIND", "조회" }, { "NEW", "추가" }, { "DLT", "삭제" }, { "SV", "저장" }, { "RT", "초기화" } };
+			string[] btnNm = { "FIND", "NEW", "DLT", "SV", "RT", "EXCEL" };
+			Dictionary<string, string> Mydic = new Dictionary<string, string>() { { "FIND", "조회" }, { "NEW", "추가" }, { "DLT", "삭제" }, { "SV", "저장" }, { "RT", "초기화" },{ "EXCEL","엑셀"} };
 			int iShow = 0;
-			int iHide = 4;
+			int iHide = 5;
 			for (int i = 0; i < Mydic.Count(); i++)
 			{
 
@@ -364,6 +364,65 @@ namespace Assambl
 					iHide--;
 				}
 			}
+		}
+	}
+
+	public class Excel
+	{
+		/// <summary>
+		/// Creates an Excel from the UltraGrid and saves it to the user mentioned Save Path
+		/// </summary>
+		/// <param name="myFilepath"></param>
+		public static void CreateExcel(String myFilepath, DC00_Component.Grid grid, Infragistics.Win.UltraWinGrid.ExcelExport ultraGridExcelExporter)
+		{
+			try
+			{
+				if (myFilepath != null)
+				{
+					//You need to Create the ExcelExporter component in the design view
+					ultraGridExcelExporter.Export(grid, myFilepath);
+					//위와 같이 컨트롤을 넣어도 됩니다. 저는 컨트롤을 붙이기 보다는  아래와 같이 선언을 해서 썼습니다. (동일)
+					//using Infragistics.Win.UltraWinGrid.ExcelExport;
+					//UltraGridExcelExporter UltraGridExcelExporter1 = new UltraGridExcelExporter();
+					//UltraGridExcelExporter1.Export(this.ultraGrid1, myFilepath);
+
+					MessageBox.Show("Grid data successfully downloaded to " + myFilepath);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		/// <summary>
+		/// Finding path for saving excel sheet.
+		/// </summary>
+		/// <returns>full path</returns>
+		public static String FindSavePath()
+		{
+			Stream myStream;
+			string myFilepath = null;
+			try
+			{
+				SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+				saveFileDialog1.Filter = "excel files (*.xls)|*.xls";
+				saveFileDialog1.FilterIndex = 2;
+				saveFileDialog1.RestoreDirectory = true;
+				if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+				{
+					if ((myStream = saveFileDialog1.OpenFile()) != null)
+					{
+						myFilepath = saveFileDialog1.FileName;
+						myStream.Close();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			return myFilepath;
 		}
 	}
 

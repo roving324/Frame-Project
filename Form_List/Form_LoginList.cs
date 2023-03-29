@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Infragistics.Win;
 using System.Xml.Linq;
+using Infragistics.Documents.Excel;
+using Infragistics.Win.UltraWinGrid.ExcelExport;
+using System.IO;
 
 namespace Form_List
 {
@@ -54,6 +57,26 @@ namespace Form_List
 			Adapter.Fill(dtTemp);
 			grid1.DataSource = dtTemp;
 			helper.Close();
+		}
+
+		public override void DoExcel()
+		{
+			try
+			{
+				//Saving to Excel file. This launches the Save dialog for the user to select the Save Path
+				Excel.CreateExcel(Excel.FindSavePath(),grid1,ultraGridExcelExporter2);
+			}
+			catch (Exception ex)
+			{
+				//Handle Exception
+				MessageBox.Show(ex.Message);
+			}
+			finally
+			{
+				//Any cleanup code
+				this.Cursor = Cursors.Default;
+				
+			}
 		}
 	}
 }

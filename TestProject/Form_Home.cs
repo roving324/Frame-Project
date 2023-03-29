@@ -47,7 +47,7 @@ namespace TestProject
 		private void Home_Load(object sender = null, EventArgs e = null)
 		{
 			DBHelper helper = new DBHelper();
-			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset); // 버튼 hide()
+			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset, BtnExcel); // 버튼 hide()
 			MainName.Text = "메인화면";
 			GBPanel2.Hide();
 			picture();
@@ -135,7 +135,7 @@ namespace TestProject
 					Test.TopLevel = false;
 					PC2.Controls.Add(Test);
 					Test.Show();
-					Btn.btnHide(btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset);
+					Btn.btnHide(btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset, BtnExcel);
 					dockManager.DockAreas[5].Panes[0].Text = "보조화면";
 					return;
 				}
@@ -160,7 +160,7 @@ namespace TestProject
 					if (PC2.Controls.Count > 0) PC2.Controls.RemoveAt(0);
 					PC2.Controls.Add(Test);
 					Test.Show();
-					object[] oBtn = { btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset };
+					object[] oBtn = { btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset, BtnExcel };
 					Btn.btnShow(oBtn, title);
 					btnsubClose.Show();
 					btnClose.BringToFront();
@@ -307,7 +307,7 @@ namespace TestProject
 			if (PC1.Controls.Count > 0)
 			{
 				PC1.Controls.RemoveAt(0);
-				Btn.btnHide(btnClose, btnFind, btnNew, btnSave, btnDelete, BtnReset);
+				Btn.btnHide(btnClose, btnFind, btnNew, btnSave, btnDelete, BtnReset, BtnExcel);
 				MainName.Text = "메인화면";
 			}
 		}
@@ -459,6 +459,9 @@ namespace TestProject
 					break;
 				case "초기화":
 					Child.DoReset();
+					break;
+				case "엑셀":
+					Child.DoExcel();
 					break;
 			}
 		}

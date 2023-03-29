@@ -116,3 +116,5 @@ C:\DEV_SOURCE\Frame_Project\Form_List\obj\Debug\Form_List.csproj.CoreCompileInpu
 C:\DEV_SOURCE\Frame_Project\Form_List\obj\Debug\Form_List.csproj.CopyComplete
 C:\DEV_SOURCE\Frame_Project\Form_List\obj\Debug\Form_List.dll
 C:\DEV_SOURCE\Frame_Project\Form_List\obj\Debug\Form_List.pdb
+C:\DEV_SOURCE\Frame_Project\Form_List\bin\Debug\Infragistics2.Win.UltraWinCalcManager.v11.1.dll
+C:\DEV_SOURCE\Frame_Project\Form_List\bin\Debug\Infragistics2.Win.UltraWinCalcManager.v11.1.xml

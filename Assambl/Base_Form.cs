@@ -22,5 +22,7 @@ namespace Assambl
 		public virtual void DoDelete(){ }
 		public virtual void DoSave() { }
 		public virtual void DoReset() { }
+
+		public virtual void DoExcel() { }
 	}
 }
