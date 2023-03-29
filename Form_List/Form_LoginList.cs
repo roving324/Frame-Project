@@ -11,6 +11,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Infragistics.Win;
+using System.Xml.Linq;
 
 namespace Form_List
 {
@@ -48,7 +50,7 @@ namespace Form_List
 			Adapter.SelectCommand.Parameters.AddWithValue("@END", string.Format("{0:yyy-MM-dd}", dtEnd.Value));
 
 
-			DataTable dtTemp = new DataTable();
+			System.Data.DataTable dtTemp = new System.Data.DataTable();
 			Adapter.Fill(dtTemp);
 			grid1.DataSource = dtTemp;
 			helper.Close();

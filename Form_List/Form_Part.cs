@@ -24,12 +24,12 @@ namespace Form_List
 			_GridUtil.InitializeGrid(this.grid1);
 			_GridUtil.InitColumnUltraGrid(grid1, "PART_NO", "품목코드", true, GridColDataType_emu.VarChar, 80, 80, Infragistics.Win.HAlign.Right, true, false);
 			_GridUtil.InitColumnUltraGrid(grid1, "PART_NM", "품목명", true, GridColDataType_emu.VarChar, 160, 160, Infragistics.Win.HAlign.Right, true, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "OBTAIN_NM", "MODEL", true, GridColDataType_emu.VarChar, 160, 160, Infragistics.Win.HAlign.Right, true, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "QUALITY", "재질", true, GridColDataType_emu.VarChar, 120, 120, Infragistics.Win.HAlign.Right, true, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "OBTAIN_NM2", "MODEL", true, GridColDataType_emu.VarChar, 160, 160, Infragistics.Win.HAlign.Right, true, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "QUALITY2", "재질", true, GridColDataType_emu.VarChar, 120, 120, Infragistics.Win.HAlign.Right, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "PART_SPEC", "SPEC", true, GridColDataType_emu.VarChar, 80, 80, Infragistics.Win.HAlign.Center, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "UNIT", "단위", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_TYPE", "자재유형", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_NO_NM", "제품유형명", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_TYPE2", "자재유형", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_NO2", "제품유형명", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "PMKG", "중량", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "REMARK", "비고", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "USE_YN", "사용구분", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
@@ -37,12 +37,12 @@ namespace Form_List
 			_GridUtil.InitColumnUltraGrid(grid1, "CREATION_BY", "생성자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "UPDATE_DATE", "수정일시", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
 			_GridUtil.InitColumnUltraGrid(grid1, "UPDATE_BY", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, true, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_NO2", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "QUALITY2", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "OBTAIN_NM2", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
-			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_TYPE2", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_NO_NM", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "QUALITY", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "OBTAIN_NM", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
+			_GridUtil.InitColumnUltraGrid(grid1, "MTRL_TYPE", "수정자", true, GridColDataType_emu.VarChar, 100, 100, Infragistics.Win.HAlign.Center, false, true);
 			_GridUtil.SetInitUltraGridBind(grid1);
-
+			
 
 			Mysql.Combo(cboSMtrlTP, "전체", "LWR_CD_NM", "TB_CODE_DTL", "MTRL_TYPE", "UPR_CD", "LWR_CD");
 			Mysql.Combo(cboSMtrlNO, "전체", "LWR_CD_NM", "TB_CODE_DTL", "MTRL_NO"  , "UPR_CD", "LWR_CD");
@@ -52,11 +52,11 @@ namespace Form_List
 			//Mysql.Combo(cboUse, "전체", "USE_YN", "TB_PLANT");
 
 
-			UltraGridUtil.SetComboUltraGrid(grid1, "OBTAIN_NM" , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "OBTAIN", "UPR_CD"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "OBTAIN_NM2" , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "OBTAIN", "UPR_CD"));
 			UltraGridUtil.SetComboUltraGrid(grid1, "UNIT"      , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "UNIT", "UPR_CD"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "MTRL_TYPE" , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "MTRL_TYPE", "UPR_CD"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "MTRL_NO_NM", Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "MTRL_NO", "UPR_CD"));
-			UltraGridUtil.SetComboUltraGrid(grid1, "QUALITY"   , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "QUALITY", "UPR_CD"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "MTRL_TYPE2" , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "MTRL_TYPE", "UPR_CD"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "MTRL_NO2", Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "MTRL_NO", "UPR_CD"));
+			UltraGridUtil.SetComboUltraGrid(grid1, "QUALITY2"   , Mysql.NCombo("LWR_CD", "LWR_CD_NM", "TB_CODE_DTL", "QUALITY", "UPR_CD"));
 			UltraGridUtil.SetComboUltraGrid(grid1, "USE_YN"    , Mysql.NCombo("USE_YN", "USE_YN", "TB_PLANT"));
 
 		}
@@ -66,7 +66,7 @@ namespace Form_List
 			DBHelper helper = new DBHelper();
 			SqlDataAdapter Adapter = new SqlDataAdapter("PART_S", helper.sCon);
 
-
+			
 			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 			Adapter.SelectCommand.Parameters.AddWithValue("@PART_NO", txtSItemCd.Text);
 			Adapter.SelectCommand.Parameters.AddWithValue("@PART_NM", txtSItemNm.Text);
@@ -83,11 +83,11 @@ namespace Form_List
 
 		private void grid1_ClickCell(object sender, Infragistics.Win.UltraWinGrid.ClickCellEventArgs e)
 		{
-			txtSItemCd.Text = grid1.ActiveRow.Cells["PART_NO"].Text;
-			txtSItemNm.Text = grid1.ActiveRow.Cells["PART_NM"].Text;
-			cboSMtrlTP.Value = grid1.ActiveRow.Cells["MTRL_TYPE"].Value;
-			cboSMtrlNO.Value = grid1.ActiveRow.Cells["MTRL_NO_NM"].Value;
-			cboSUseYN.Value = grid1.ActiveRow.Cells["USE_YN"].Value;
+			//txtSItemCd.Text = grid1.ActiveRow.Cells["PART_NO"].Text;
+			//txtSItemNm.Text = grid1.ActiveRow.Cells["PART_NM"].Text;
+			//cboSMtrlTP.Value = grid1.ActiveRow.Cells["MTRL_TYPE"].Value;
+			//cboSMtrlNO.Value = grid1.ActiveRow.Cells["MTRL_NO_NM"].Value;
+			//cboSUseYN.Value = grid1.ActiveRow.Cells["USE_YN"].Value;
 
 		}
 
@@ -102,6 +102,7 @@ namespace Form_List
 		public override void DoReset()
 		{
 			cboSMtrlTP.Value = cboSMtrlNO.Value = cboSUseYN.Value = txtSItemCd.Text = txtSItemNm.Text = "";
+			DoInquire();
 		}
 
 		public override void DoSave()
@@ -121,9 +122,9 @@ namespace Form_List
 			foreach (DataRow dr in dtTemp.Rows)
 			{
 				int[] arry = { dr.Table.Columns.IndexOf("PART_NO"), dr.Table.Columns.IndexOf("PART_NM"),
-							   dr.Table.Columns.IndexOf("OBTAIN_NM"), dr.Table.Columns.IndexOf("QUALITY"),
+							   dr.Table.Columns.IndexOf("OBTAIN_NM2"), dr.Table.Columns.IndexOf("QUALITY2"),
 							   dr.Table.Columns.IndexOf("PART_SPEC"), dr.Table.Columns.IndexOf("UNIT"),
-							   dr.Table.Columns.IndexOf("MTRL_TYPE"), dr.Table.Columns.IndexOf("MTRL_NO_NM"),
+							   dr.Table.Columns.IndexOf("MTRL_TYPE2"), dr.Table.Columns.IndexOf("MTRL_NO2"),
 							   dr.Table.Columns.IndexOf("PMKG"), dr.Table.Columns.IndexOf("USE_YN"),
 							   dr.Table.Columns.IndexOf("REMARK")};
 				foreach (int i in arry)
@@ -139,9 +140,9 @@ namespace Form_List
 				
 
 				helper.ExecuteNoneQuery("TB_PART_I", ("@PART_NO", Convert.ToString(dr["PART_NO"])), ("@PART_NM", Convert.ToString(dr["PART_NM"]))
-										 , ("@OBTAIN", Convert.ToString(dr["OBTAIN_NM"])), ("@QUALITY", Convert.ToString(dr["QUALITY"]))
+										 , ("@OBTAIN", Convert.ToString(dr["OBTAIN_NM2"])), ("@QUALITY", Convert.ToString(dr["QUALITY2"]))
 										 , ("@PART_SPEC", Convert.ToString(dr["PART_SPEC"])), ("@UNIT", Convert.ToString(dr["UNIT"]))
-										 , ("@MTRL_TYPE", Convert.ToString(dr["MTRL_TYPE"])), ("@MTRL_NO", Convert.ToString(dr["MTRL_NO_NM"]))
+										 , ("@MTRL_TYPE", Convert.ToString(dr["MTRL_TYPE2"])), ("@MTRL_NO", Convert.ToString(dr["MTRL_NO2"]))
 										 , ("@REMARK", Convert.ToString(dr["REMARK"])), ("@USE_YN", Convert.ToString(dr["USE_YN"]))
 										 , ("@PMKG", Convert.ToString(dr["PMKG"]))
 
