@@ -46,7 +46,7 @@
 			this.ultraGroupBox2 = new Infragistics.Win.Misc.UltraGroupBox();
 			this.txtProductNum = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
 			this.ultraLabel5 = new Infragistics.Win.Misc.UltraLabel();
-			this.cboUseFlag = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
+			this.cboCHK = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
 			this.ultraLabel4 = new Infragistics.Win.Misc.UltraLabel();
 			this.cboWCC = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
 			this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
@@ -60,7 +60,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox2)).BeginInit();
 			this.ultraGroupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.txtProductNum)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.cboUseFlag)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.cboCHK)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.cboWCC)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.cboItemCode)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.cboPlantCode)).BeginInit();
@@ -162,7 +162,7 @@
 			// 
 			this.ultraGroupBox2.Controls.Add(this.txtProductNum);
 			this.ultraGroupBox2.Controls.Add(this.ultraLabel5);
-			this.ultraGroupBox2.Controls.Add(this.cboUseFlag);
+			this.ultraGroupBox2.Controls.Add(this.cboCHK);
 			this.ultraGroupBox2.Controls.Add(this.ultraLabel4);
 			this.ultraGroupBox2.Controls.Add(this.cboWCC);
 			this.ultraGroupBox2.Controls.Add(this.ultraLabel1);
@@ -192,13 +192,13 @@
 			this.ultraLabel5.TabIndex = 9;
 			this.ultraLabel5.Text = "작업지시번호";
 			// 
-			// cboUseFlag
+			// cboCHK
 			// 
-			this.cboUseFlag.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.cboUseFlag.Location = new System.Drawing.Point(775, 12);
-			this.cboUseFlag.Name = "cboUseFlag";
-			this.cboUseFlag.Size = new System.Drawing.Size(144, 25);
-			this.cboUseFlag.TabIndex = 3;
+			this.cboCHK.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.cboCHK.Location = new System.Drawing.Point(775, 12);
+			this.cboCHK.Name = "cboCHK";
+			this.cboCHK.Size = new System.Drawing.Size(144, 25);
+			this.cboCHK.TabIndex = 3;
 			// 
 			// ultraLabel4
 			// 
@@ -206,7 +206,7 @@
 			this.ultraLabel4.Name = "ultraLabel4";
 			this.ultraLabel4.Size = new System.Drawing.Size(72, 23);
 			this.ultraLabel4.TabIndex = 7;
-			this.ultraLabel4.Text = "종료여부";
+			this.ultraLabel4.Text = "확정여부";
 			// 
 			// cboWCC
 			// 
@@ -272,7 +272,7 @@
 			this.ultraGroupBox2.ResumeLayout(false);
 			this.ultraGroupBox2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.txtProductNum)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.cboUseFlag)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.cboCHK)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cboWCC)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cboItemCode)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cboPlantCode)).EndInit();
@@ -287,7 +287,7 @@
 		private Infragistics.Win.Misc.UltraGroupBox ultraGroupBox2;
 		private Infragistics.Win.UltraWinEditors.UltraComboEditor cboPlantCode;
 		private Infragistics.Win.Misc.UltraLabel ultraLabel3;
-		private Infragistics.Win.UltraWinEditors.UltraComboEditor cboUseFlag;
+		private Infragistics.Win.UltraWinEditors.UltraComboEditor cboCHK;
 		private Infragistics.Win.Misc.UltraLabel ultraLabel4;
 		private Infragistics.Win.UltraWinEditors.UltraComboEditor cboWCC;
 		private Infragistics.Win.Misc.UltraLabel ultraLabel1;

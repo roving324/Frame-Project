@@ -47,7 +47,7 @@ namespace TestProject
 		private void Home_Load(object sender = null, EventArgs e = null)
 		{
 			DBHelper helper = new DBHelper();
-			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset, BtnExcel); // 버튼 hide()
+			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset, BtnExcel, BtnSubExcel); // 버튼 hide()
 			MainName.Text = "메인화면";
 			GBPanel2.Hide();
 			picture();
@@ -135,7 +135,7 @@ namespace TestProject
 					Test.TopLevel = false;
 					PC2.Controls.Add(Test);
 					Test.Show();
-					Btn.btnHide(btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset, BtnExcel);
+					Btn.btnHide(btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset, BtnSubExcel);
 					dockManager.DockAreas[5].Panes[0].Text = "보조화면";
 					return;
 				}
@@ -149,7 +149,7 @@ namespace TestProject
 					if (PC1.Controls.Count > 0) PC1.Controls.RemoveAt(0); // 기존 화면 제거
 					PC1.Controls.Add(Test); // 화면 추가
 					Test.Show();            // 화면 출력
-					object[] oBtn = { btnFind, btnNew, btnDelete, btnSave, BtnReset };
+					object[] oBtn = { btnFind, btnNew, btnDelete, btnSave, BtnReset, BtnExcel };
 					Btn.btnShow(oBtn, title); // 권한있는 버튼만 출력
 					btnClose.Show();
 					btnClose.BringToFront(); // 위치 화면 맨 앞으로
@@ -160,7 +160,7 @@ namespace TestProject
 					if (PC2.Controls.Count > 0) PC2.Controls.RemoveAt(0);
 					PC2.Controls.Add(Test);
 					Test.Show();
-					object[] oBtn = { btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset, BtnExcel };
+					object[] oBtn = { btnsubFind, btnsubNew, btnsubDelete, btnsubSave, BtnSubReset, BtnSubExcel };
 					Btn.btnShow(oBtn, title);
 					btnsubClose.Show();
 					btnClose.BringToFront();

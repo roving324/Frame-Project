@@ -157,12 +157,12 @@ namespace TestProject
 			this._Form_HomeUnpinnedTabAreaTop = new Infragistics.Win.UltraWinDock.UnpinnedTabArea();
 			this._Form_HomeUnpinnedTabAreaBottom = new Infragistics.Win.UltraWinDock.UnpinnedTabArea();
 			this._Form_HomeAutoHideControl = new Infragistics.Win.UltraWinDock.AutoHideControl();
-			this.dockableWindow4 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow3 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow6 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow5 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow1 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.dockableWindow2 = new Infragistics.Win.UltraWinDock.DockableWindow();
+			this.dockableWindow4 = new Infragistics.Win.UltraWinDock.DockableWindow();
 			this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
 			this.treMenu = new Infragistics.Win.UltraWinTree.UltraTree();
 			this.txtSearch = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -174,6 +174,7 @@ namespace TestProject
 			this.ultraGroupBox3 = new Infragistics.Win.Misc.UltraGroupBox();
 			this.btnFind = new Infragistics.Win.Misc.UltraButton();
 			this.btnNew = new Infragistics.Win.Misc.UltraButton();
+			this.BtnExcel = new Infragistics.Win.Misc.UltraButton();
 			this.BtnReset = new Infragistics.Win.Misc.UltraButton();
 			this.btnSave = new Infragistics.Win.Misc.UltraButton();
 			this.btnDelete = new Infragistics.Win.Misc.UltraButton();
@@ -184,7 +185,7 @@ namespace TestProject
 			this.timer = new System.Windows.Forms.Timer(this.components);
 			this.windowDockingArea7 = new Infragistics.Win.UltraWinDock.WindowDockingArea();
 			this.windowDockingArea3 = new Infragistics.Win.UltraWinDock.WindowDockingArea();
-			this.BtnExcel = new Infragistics.Win.Misc.UltraButton();
+			this.BtnSubExcel = new Infragistics.Win.Misc.UltraButton();
 			this.ultraPanel2.ClientArea.SuspendLayout();
 			this.ultraPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Menu)).BeginInit();
@@ -233,12 +234,12 @@ namespace TestProject
 			this.ultraGroupBox4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
 			this._Form_HomeAutoHideControl.SuspendLayout();
-			this.dockableWindow4.SuspendLayout();
 			this.dockableWindow3.SuspendLayout();
 			this.dockableWindow6.SuspendLayout();
 			this.dockableWindow5.SuspendLayout();
 			this.dockableWindow1.SuspendLayout();
 			this.dockableWindow2.SuspendLayout();
+			this.dockableWindow4.SuspendLayout();
 			this.ultraPanel1.ClientArea.SuspendLayout();
 			this.ultraPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.treMenu)).BeginInit();
@@ -1015,6 +1016,7 @@ namespace TestProject
 			// ultraGroupBox4
 			// 
 			this.ultraGroupBox4.BorderStyle = Infragistics.Win.Misc.GroupBoxBorderStyle.None;
+			this.ultraGroupBox4.Controls.Add(this.BtnSubExcel);
 			this.ultraGroupBox4.Controls.Add(this.BtnSubReset);
 			this.ultraGroupBox4.Controls.Add(this.btnsubSave);
 			this.ultraGroupBox4.Controls.Add(this.btnsubFind);
@@ -1205,71 +1207,71 @@ namespace TestProject
 			// 
 			// _Form_HomeAutoHideControl
 			// 
-			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow3);
 			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow6);
 			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow5);
 			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow1);
 			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow2);
+			this._Form_HomeAutoHideControl.Controls.Add(this.dockableWindow4);
 			this._Form_HomeAutoHideControl.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this._Form_HomeAutoHideControl.Location = new System.Drawing.Point(21, 0);
+			this._Form_HomeAutoHideControl.Location = new System.Drawing.Point(283, 0);
 			this._Form_HomeAutoHideControl.Name = "_Form_HomeAutoHideControl";
 			this._Form_HomeAutoHideControl.Owner = this.dockManager;
-			this._Form_HomeAutoHideControl.Size = new System.Drawing.Size(254, 643);
+			this._Form_HomeAutoHideControl.Size = new System.Drawing.Size(891, 643);
 			this._Form_HomeAutoHideControl.TabIndex = 9;
-			// 
-			// dockableWindow4
-			// 
-			this.dockableWindow4.Controls.Add(this.ultraPanel2);
-			this.dockableWindow4.Location = new System.Drawing.Point(0, 0);
-			this.dockableWindow4.Name = "dockableWindow4";
-			this.dockableWindow4.Owner = this.dockManager;
-			this.dockableWindow4.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow4.TabIndex = 31;
 			// 
 			// dockableWindow3
 			// 
-			this.dockableWindow3.Controls.Add(this.ultraTilePanel1);
+			this.dockableWindow3.Controls.Add(this.ultraPanel2);
 			this.dockableWindow3.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow3.Name = "dockableWindow3";
 			this.dockableWindow3.Owner = this.dockManager;
 			this.dockableWindow3.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow3.TabIndex = 32;
+			this.dockableWindow3.TabIndex = 31;
 			// 
 			// dockableWindow6
 			// 
-			this.dockableWindow6.Controls.Add(this.GBCalendar);
+			this.dockableWindow6.Controls.Add(this.ultraTilePanel1);
 			this.dockableWindow6.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow6.Name = "dockableWindow6";
 			this.dockableWindow6.Owner = this.dockManager;
 			this.dockableWindow6.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow6.TabIndex = 33;
+			this.dockableWindow6.TabIndex = 32;
 			// 
 			// dockableWindow5
 			// 
-			this.dockableWindow5.Controls.Add(this.GBProfil);
+			this.dockableWindow5.Controls.Add(this.GBCalendar);
 			this.dockableWindow5.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow5.Name = "dockableWindow5";
 			this.dockableWindow5.Owner = this.dockManager;
 			this.dockableWindow5.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow5.TabIndex = 34;
+			this.dockableWindow5.TabIndex = 33;
 			// 
 			// dockableWindow1
 			// 
-			this.dockableWindow1.Controls.Add(this.ultraGroupBox5);
+			this.dockableWindow1.Controls.Add(this.GBProfil);
 			this.dockableWindow1.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow1.Name = "dockableWindow1";
 			this.dockableWindow1.Owner = this.dockManager;
 			this.dockableWindow1.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow1.TabIndex = 35;
+			this.dockableWindow1.TabIndex = 34;
 			// 
 			// dockableWindow2
 			// 
-			this.dockableWindow2.Controls.Add(this.GBPanel2);
+			this.dockableWindow2.Controls.Add(this.ultraGroupBox5);
 			this.dockableWindow2.Location = new System.Drawing.Point(0, 0);
 			this.dockableWindow2.Name = "dockableWindow2";
 			this.dockableWindow2.Owner = this.dockManager;
 			this.dockableWindow2.Size = new System.Drawing.Size(183, 643);
-			this.dockableWindow2.TabIndex = 36;
+			this.dockableWindow2.TabIndex = 35;
+			// 
+			// dockableWindow4
+			// 
+			this.dockableWindow4.Controls.Add(this.GBPanel2);
+			this.dockableWindow4.Location = new System.Drawing.Point(0, 0);
+			this.dockableWindow4.Name = "dockableWindow4";
+			this.dockableWindow4.Owner = this.dockManager;
+			this.dockableWindow4.Size = new System.Drawing.Size(886, 643);
+			this.dockableWindow4.TabIndex = 36;
 			// 
 			// ultraPanel1
 			// 
@@ -1344,7 +1346,7 @@ namespace TestProject
 			// 
 			// windowDockingArea1
 			// 
-			this.windowDockingArea1.Controls.Add(this.dockableWindow4);
+			this.windowDockingArea1.Controls.Add(this.dockableWindow3);
 			this.windowDockingArea1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.windowDockingArea1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
 			this.windowDockingArea1.Location = new System.Drawing.Point(21, 0);
@@ -1428,6 +1430,15 @@ namespace TestProject
 			this.btnNew.TabIndex = 2;
 			this.btnNew.Text = "추가";
 			this.btnNew.Click += new System.EventHandler(this.btnEvent_Click);
+			// 
+			// BtnExcel
+			// 
+			this.BtnExcel.Location = new System.Drawing.Point(763, 9);
+			this.BtnExcel.Name = "BtnExcel";
+			this.BtnExcel.Size = new System.Drawing.Size(110, 34);
+			this.BtnExcel.TabIndex = 3;
+			this.BtnExcel.Text = "엑셀";
+			this.BtnExcel.Click += new System.EventHandler(this.btnEvent_Click);
 			// 
 			// BtnReset
 			// 
@@ -1522,14 +1533,14 @@ namespace TestProject
 			this.windowDockingArea3.Size = new System.Drawing.Size(740, 643);
 			this.windowDockingArea3.TabIndex = 30;
 			// 
-			// BtnExcel
+			// BtnSubExcel
 			// 
-			this.BtnExcel.Location = new System.Drawing.Point(763, 9);
-			this.BtnExcel.Name = "BtnExcel";
-			this.BtnExcel.Size = new System.Drawing.Size(110, 34);
-			this.BtnExcel.TabIndex = 3;
-			this.BtnExcel.Text = "엑셀";
-			this.BtnExcel.Click += new System.EventHandler(this.btnEvent_Click);
+			this.BtnSubExcel.Location = new System.Drawing.Point(737, 5);
+			this.BtnSubExcel.Name = "BtnSubExcel";
+			this.BtnSubExcel.Size = new System.Drawing.Size(110, 34);
+			this.BtnSubExcel.TabIndex = 7;
+			this.BtnSubExcel.Text = "엑셀";
+			this.BtnSubExcel.Click += new System.EventHandler(this.btnEvent_Click);
 			// 
 			// Form_Home
 			// 
@@ -1609,12 +1620,12 @@ namespace TestProject
 			this.ultraGroupBox4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
 			this._Form_HomeAutoHideControl.ResumeLayout(false);
-			this.dockableWindow4.ResumeLayout(false);
 			this.dockableWindow3.ResumeLayout(false);
 			this.dockableWindow6.ResumeLayout(false);
 			this.dockableWindow5.ResumeLayout(false);
 			this.dockableWindow1.ResumeLayout(false);
 			this.dockableWindow2.ResumeLayout(false);
+			this.dockableWindow4.ResumeLayout(false);
 			this.ultraPanel1.ClientArea.ResumeLayout(false);
 			this.ultraPanel1.ClientArea.PerformLayout();
 			this.ultraPanel1.ResumeLayout(false);
@@ -1734,5 +1745,6 @@ namespace TestProject
 		private WindowDockingArea windowDockingArea3;
 		private UltraDockManager dockManager;
 		private Infragistics.Win.Misc.UltraButton BtnExcel;
+		private Infragistics.Win.Misc.UltraButton BtnSubExcel;
 	}
 }

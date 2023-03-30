@@ -1,4 +1,5 @@
 ﻿using System;
+using Assambl;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,8 @@ using Infragistics.Win.Misc;
 using Infragistics.Win.UltraWinDock;
 using Infragistics.Win.UltraWinEditors;
 using Infragistics.Win.UltraWinGrid;
+using Infragistics.Documents.Excel;
+using Infragistics.Win.UltraWinGrid.ExcelExport;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
@@ -284,9 +287,9 @@ namespace Assambl
 			Connect.Close();
 		}
 
-		public static DataTable NCombo(string Name, string EName, string Table)
+		public static DataTable NCombo(string Name, string EName, string Table, string Scon = common.sConn)
 		{
-			SqlConnection Connect = new SqlConnection(common.sConn);
+			SqlConnection Connect = new SqlConnection(Scon);
 			// 데이터 베이스 오픈.
 			Connect.Open();
 			// 2. 품목유형 데이터 리스트 조회 SQL
@@ -344,8 +347,8 @@ namespace Assambl
 			Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", title);
 			DataTable dTtemp = new DataTable();
 			Adapter.Fill(dTtemp);
-			string[] btnNm = { "FIND", "NEW", "DLT", "SV", "RT", "EXCEL" };
-			Dictionary<string, string> Mydic = new Dictionary<string, string>() { { "FIND", "조회" }, { "NEW", "추가" }, { "DLT", "삭제" }, { "SV", "저장" }, { "RT", "초기화" },{ "EXCEL","엑셀"} };
+			string[] btnNm = { "FIND", "NEW", "DLT", "SV", "RT", "EX" };
+			Dictionary<string, string> Mydic = new Dictionary<string, string>() { { "FIND", "조회" }, { "NEW", "추가" }, { "DLT", "삭제" }, { "SV", "저장" }, { "RT", "초기화" },{ "EX","엑셀"} };
 			int iShow = 0;
 			int iHide = 5;
 			for (int i = 0; i < Mydic.Count(); i++)
@@ -373,18 +376,18 @@ namespace Assambl
 		/// Creates an Excel from the UltraGrid and saves it to the user mentioned Save Path
 		/// </summary>
 		/// <param name="myFilepath"></param>
-		public static void CreateExcel(String myFilepath, DC00_Component.Grid grid, Infragistics.Win.UltraWinGrid.ExcelExport ultraGridExcelExporter)
+		public static void CreateExcel(String myFilepath, DC00_Component.Grid grid)
 		{
 			try
 			{
 				if (myFilepath != null)
 				{
 					//You need to Create the ExcelExporter component in the design view
-					ultraGridExcelExporter.Export(grid, myFilepath);
+					//ultraGridExcelExporter.Export(grid, myFilepath);
 					//위와 같이 컨트롤을 넣어도 됩니다. 저는 컨트롤을 붙이기 보다는  아래와 같이 선언을 해서 썼습니다. (동일)
 					//using Infragistics.Win.UltraWinGrid.ExcelExport;
-					//UltraGridExcelExporter UltraGridExcelExporter1 = new UltraGridExcelExporter();
-					//UltraGridExcelExporter1.Export(this.ultraGrid1, myFilepath);
+					UltraGridExcelExporter UltraGridExcelExporter1 = new UltraGridExcelExporter();
+					UltraGridExcelExporter1.Export(grid, myFilepath);
 
 					MessageBox.Show("Grid data successfully downloaded to " + myFilepath);
 				}

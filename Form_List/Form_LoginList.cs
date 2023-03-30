@@ -64,7 +64,7 @@ namespace Form_List
 			try
 			{
 				//Saving to Excel file. This launches the Save dialog for the user to select the Save Path
-				Excel.CreateExcel(Excel.FindSavePath(),grid1,ultraGridExcelExporter2);
+				Excel.CreateExcel(Excel.FindSavePath(),grid1);
 			}
 			catch (Exception ex)
 			{

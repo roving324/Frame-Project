@@ -45,7 +45,6 @@ namespace Form_List
 			Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
 			this.grid1 = new DC00_Component.Grid(this.components);
 			this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
-			this.ultraButton1 = new Infragistics.Win.Misc.UltraButton();
 			this.dtEnd = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
 			this.dtStart = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
 			this.txtName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -53,7 +52,6 @@ namespace Form_List
 			this.label6 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.ultraGridExcelExporter2 = new Infragistics.Win.UltraWinGrid.ExcelExport.UltraGridExcelExporter(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.grid1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).BeginInit();
 			this.ultraGroupBox1.SuspendLayout();
@@ -148,7 +146,6 @@ namespace Form_List
 			// 
 			// ultraGroupBox1
 			// 
-			this.ultraGroupBox1.Controls.Add(this.ultraButton1);
 			this.ultraGroupBox1.Controls.Add(this.dtEnd);
 			this.ultraGroupBox1.Controls.Add(this.dtStart);
 			this.ultraGroupBox1.Controls.Add(this.txtName);
@@ -161,14 +158,6 @@ namespace Form_List
 			this.ultraGroupBox1.Name = "ultraGroupBox1";
 			this.ultraGroupBox1.Size = new System.Drawing.Size(800, 143);
 			this.ultraGroupBox1.TabIndex = 10;
-			// 
-			// ultraButton1
-			// 
-			this.ultraButton1.Location = new System.Drawing.Point(598, 89);
-			this.ultraButton1.Name = "ultraButton1";
-			this.ultraButton1.Size = new System.Drawing.Size(75, 23);
-			this.ultraButton1.TabIndex = 8;
-			this.ultraButton1.Text = "ultraButton1";
 			// 
 			// dtEnd
 			// 
@@ -260,7 +249,5 @@ namespace Form_List
 		private Infragistics.Win.UltraWinEditors.UltraTextEditor txtId;
 		private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor dtEnd;
 		private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor dtStart;
-		private Infragistics.Win.Misc.UltraButton ultraButton1;
-		private UltraGridExcelExporter ultraGridExcelExporter2;
 	}
 }

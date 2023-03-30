@@ -57,6 +57,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Infragistics\NetAdvantage 2011.1\Windows Forms\Bin\Infragistics2.Win.UltraWinEditors.v11.1.dll</HintPath>
     </Reference>
+    <Reference Include="Infragistics2.Win.UltraWinGrid.ExcelExport.v11.1, Version=11.1.20111.2071, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Infragistics\NetAdvantage 2011.1\Windows Forms\Bin\Infragistics2.Win.UltraWinGrid.ExcelExport.v11.1.dll</HintPath>
+    </Reference>
     <Reference Include="Infragistics2.Win.UltraWinGrid.v11.1, Version=11.1.20111.2071, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\TestProject\bin\Debug\Infragistics2.Win.UltraWinGrid.v11.1.dll</HintPath>

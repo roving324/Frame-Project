@@ -50,6 +50,7 @@ namespace Form_List
 			_GridUtil.InitColumnUltraGrid(FORM, "SV"   , "저장"  , false, GridColDataType_emu.CheckBox, 120, 120, Infragistics.Win.HAlign.Left, true, true);
 			_GridUtil.InitColumnUltraGrid(FORM, "DLT"  , "삭제"  , false, GridColDataType_emu.CheckBox, 120, 120, Infragistics.Win.HAlign.Left, true, true);
 			_GridUtil.InitColumnUltraGrid(FORM, "RT"   , "초기화", false, GridColDataType_emu.CheckBox, 120, 120, Infragistics.Win.HAlign.Left, true, true);
+			_GridUtil.InitColumnUltraGrid(FORM, "EX"   , "엑셀"  , false, GridColDataType_emu.CheckBox, 120, 120, Infragistics.Win.HAlign.Left, true, true);
 
 			_GridUtil.SetInitUltraGridBind(FORM);
 
@@ -190,13 +191,13 @@ namespace Form_List
 							case DataRowState.Added:
 								if (Convert.ToString(drRow["FORM"]) == "") throw new Exception("화면을 입력하지 않았습니다.");
 								helper.ExecuteNoneQuery("FORM_IP", ("@TITLE", Convert.ToString(MENU.ActiveRow.Cells["TITLE"].Value)), ("@FORM", drRow["FORM"].ToString()), ("@FIND", Convert.ToInt32(drRow["FIND"]))
-																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@RT", Convert.ToInt32(drRow["RT"])),("@TYPE", "I"));
+																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@RT", Convert.ToInt32(drRow["RT"])), ("@EX", Convert.ToInt32(drRow["EX"])),("@TYPE", "I"));
 
 								break;
 							case DataRowState.Modified:
 								if (Convert.ToString(drRow["FORM"]) == "") throw new Exception("화면을 입력하지 않았습니다.");
 								helper.ExecuteNoneQuery("FORM_IP", ("@TITLE", Convert.ToString(MENU.ActiveRow.Cells["TITLE"].Value)), ("@FORM", drRow["FORM"].ToString()), ("@FIND", Convert.ToInt32(drRow["FIND"]))
-																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@RT", Convert.ToInt32(drRow["RT"])), ("@TYPE", "U"));
+																 , ("@SV", Convert.ToInt32(drRow["SV"])), ("@DLT", Convert.ToInt32(drRow["DLT"])), ("@NEW", Convert.ToInt32(drRow["NEW"])), ("@RT", Convert.ToInt32(drRow["RT"])), ("@EX", Convert.ToInt32(drRow["EX"])),("@TYPE", "U"));
 
 								break;
 						}
@@ -252,7 +253,7 @@ namespace Form_List
 		{
 			string TITLE = Convert.ToString(MENU.ActiveRow.Cells["TITLE"].Value);
 			DBHelper helper = new DBHelper();
-			SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S1", helper.sCon);
+			SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S", helper.sCon);
 
 			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 			Adapter.SelectCommand.Parameters.AddWithValue("@TITLE", TITLE);

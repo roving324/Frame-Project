@@ -2,6 +2,7 @@
 using DC00_assm;
 using DC00_Component;
 using Infragistics.Win.UltraWinGrid;
+using Infragistics.Win.UltraWinGrid.ExcelExport;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -165,6 +166,26 @@ namespace Form_List
 			DoReset();
 			DoInquire();
 
+		}
+
+		public override void DoExcel()
+		{
+			try
+			{
+				//Saving to Excel file. This launches the Save dialog for the user to select the Save Path
+				Excel.CreateExcel(Excel.FindSavePath(), grid1);
+			}
+			catch (Exception ex)
+			{
+				//Handle Exception
+				MessageBox.Show(ex.Message);
+			}
+			finally
+			{
+				//Any cleanup code
+				this.Cursor = Cursors.Default;
+
+			}
 		}
 	}
 }
