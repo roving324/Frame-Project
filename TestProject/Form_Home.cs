@@ -29,6 +29,7 @@ namespace TestProject
 	public partial class Form_Home : Form
 	{
 		DataTable dtTemp3 = new DataTable();
+		private NotifyIcon notifyIcon;
 
 		public Form_Home()
 		{
@@ -555,6 +556,11 @@ namespace TestProject
 				txtMesinger.Text = sbAddress.ToString();
 				txtMesinger.SelectionStart = txtMesinger.Text.Length;
 				txtMesinger.ScrollToCaret();
+				int u = dtTemp2.Rows.Count - 1;
+				if (common.sID != dtTemp2.Rows[u]["ID"].ToString() && "Y" == dtTemp2.Rows[u]["INFO"].ToString())
+				{
+					notifyIcon.ShowBalloonTip(5000, "메신저확인", "확인바람", ToolTipIcon.Info); // 메신저를 사용하기 위한 알림창
+				}
 			}
 			catch(Exception ex)
 			{
