@@ -57,7 +57,7 @@ Calendar_DateChanged(); // 로드시 일정 바로 조회
 helper.Close();
 ```
 
-## SQL 데이터 추가시 바로 윈품 이벤트 호
+## SQL 데이터 추가시 바로 윈품 이벤트 호출
 ```
 // SQLServer 에서 PUSH 방식으로 데이터 게더링.
 		SqlDependency sd;
