@@ -24,40 +24,114 @@ using Infragistics.Win.UltraWinEditors;
 using Infragistics.Win.UltraWinGrid;
 using Infragistics.Documents.Excel;
 using Infragistics.Win.UltraWinGrid.ExcelExport;
+using System.Reflection;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Assambl
 {
-	public static class common
-	{
-		public const string sConn = "Data Source=222.235.141.8; Initial Catalog=KDTB_2JO; User ID= 2JO ; Password = 1234 ";
-		public const string sConn2 = "Data Source=222.235.141.8; Initial Catalog=KDTB_1JO; User ID= 1JO ; Password = 1234 ";
-		public static string sID = "";
-	}
+    //private Assambl instance;
+    //
+    //public Assambl GetInstance()
+    //{
+    //    if (InstanceCreationEditor == null)
+    //        instance = new Assambl();
+    //
+    //    return instance;
+    //}
+    public class DisposedClass : IDisposable
+    {
 
+        #region IDisposable Support
+        private bool disposedValue = false; // 중복 호출을 검색하려면
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: 관리되는 상태(관리되는 개체)를 삭제합니다.
+                }
 
-	// Transaction 사용법
-	// 테이블 첫 번째 컬럼은 int, 증가 컬럼 사용
-	// 아래에 있는 모든 주석 풀기
-	// DBHelper helper = new DBHelper(true)
-	// helper.open()
-	// helper.Transaction()
-	// helper.commit()
-	// helper.Rollback()
+                // TODO: 관리되지 않는 리소스(관리되지 않는 개체)를 해제하고 아래의 종료자를 재정의합니다.
+                // TODO: 큰 필드를 null로 설정합니다.
 
-	public class DBHelper
-	{
-		DataTable odtTemp = new DataTable();
+                disposedValue = true;
+            }
+        }
+
+        
+        // TODO: 위의 Dispose(bool disposing)에 관리되지 않는 리소스를 해제하는 코드가 포함되어 있는 경우에만 종료자를 재정의합니다.
+        // ~DisposeClass() {
+        //   // 이 코드를 변경하지 마세요. 위의 Dispose(bool disposing)에 정리 코드를 입력하세요.
+        //   Dispose(false);
+        // }
+
+        // 삭제 가능한 패턴을 올바르게 구현하기 위해 추가된 코드입니다.
+        public void Dispose()
+        {
+            //using (SqlConnection sqlc = new SqlConnection())
+            //{
+            //    sqlc.Open();
+            //}
+            // 이 코드를 변경하지 마세요. 위의 Dispose(bool disposing)에 정리 코드를 입력하세요.
+            Dispose(true);
+            // TODO: 위의 종료자가 재정의된 경우 다음 코드 줄의 주석 처리를 제거합니다.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
+    }
+
+    public static class common
+    {
+        public const string sConn = "Data Source=222.235.141.8; Initial Catalog=KDTB_2JO; User ID= 2JO ; Password = 1234 ";
+        public const string sConn2 = "Data Source=222.235.141.8; Initial Catalog=KDTB_1JO; User ID= 1JO ; Password = 1234 ";
+        public static string sID = "";
+        public static string sOldVersion = "";
+        public static string version = "";
+
+    }
+
+    public class LoadForm
+    {
+        Loading LD = null;
+        public LoadForm()
+        {
+            LD = new Loading();
+            LD.Show();
+            LD.Size = new Size(64, 64);
+        }
+
+        public void close()
+        {
+            if (LD != null) LD.Close();
+
+        }
+
+    }
+
+    // Transaction 사용법
+    // 테이블 첫 번째 컬럼은 int, 증가 컬럼 사용
+    // 아래에 있는 모든 주석 풀기
+    // DBHelper helper = new DBHelper(true)
+    // helper.open()
+    // helper.Transaction()
+    // helper.commit()
+    // helper.Rollback()
+
+    public class DBHelper
+    {
+        DataTable odtTemp = new DataTable();
 		//string oTable = "";
 		public SqlConnection sCon = null;
 		SqlTransaction sTran = null;
 		SqlCommand cmd = new SqlCommand();
+        
 
-		public DBHelper(bool flag = false,string SCon = common.sConn)
+        public DBHelper(bool flag = false,string SCon = common.sConn)
 		{
-			// 데이터 베이스 오픈.
-			sCon = new SqlConnection(SCon);
+            // 데이터 베이스 오픈.
+            sCon = new SqlConnection(SCon);
 			sCon.Open();
 			if (flag)
 			{
@@ -77,12 +151,27 @@ namespace Assambl
 				cmd.Parameters.Clear();                        // 기존 파라메터 초기화
 				if (parameters != null)
 				{
-					string[] arry = Array.ConvertAll(parameters, p => (p ?? string.Empty).ToString()); // object[] => string[]로 변환 ,  p => (p ?? string.Empty).ToString() : 람다식
-					string[] sKey = new string[2];
-					for (int i = 0; i < arry.Length; i++)
+                    //string[] arry = { };
+                    //string[,] te = { };
+                    //string slist = "{";
+                    //List<string> arry = null;
+					//string[] arry = Array.ConvertAll(parameters, p => (p ?? string.Empty).ToString()); // object[] => string[]로 변환 ,  p => (p ?? string.Empty).ToString() : 람다식
+                    //int count = 0;
+                    //for (int i = 0; i < parameters.Length; i++)
+                    //{
+                    //    
+                    //    slist += "{ " + $"{parameters[i] + ","  + parameters[i+1]}" + "}";
+                    //    //arry.Add(parameters[i].ToString());
+                    //}
+                    //slist += "}";
+
+
+                    string[] sKey = new string[2];
+					for (int i = 0; i < parameters.Length; i++)
 					{
-						sKey = arry[i].Split(',');  // ("@ex", Value) 으로 나누기
-						cmd.Parameters.Add(new SqlParameter(sKey[0].Substring(1), sKey[1].Substring(1, sKey[1].Length - 2))); // sKey[0] : @ex, sKey[1] : Value
+                        if (i % 2 != 0) continue;
+                        //sKey = arry[i].Split(',');  // ("@ex", Value) 으로 나누기
+                        cmd.Parameters.Add(new SqlParameter(parameters[i].ToString(), parameters[i+1].ToString())); // sKey[0] : @ex, sKey[1] : Value
 					}
 				}
 				cmd.ExecuteNonQuery();
@@ -183,7 +272,6 @@ namespace Assambl
 		//		try
 		//		{
 		//			sSqlSelect = $"SELECT {Columns}  FROM {Table} ";
-		//			adapter = new SqlDataAdapter(sSqlSelect, Connect);
 		//			adapter = new SqlDataAdapter(sSqlSelect, Connect);
 		//			DataTable dtTemp = new DataTable();
 		//			adapter.Fill(dtTemp);

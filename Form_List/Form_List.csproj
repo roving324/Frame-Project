@@ -73,9 +73,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Infragistics\NetAdvantage 2011.1\Windows Forms\Bin\Infragistics2.Win.v11.1.dll</HintPath>
     </Reference>
+    <Reference Include="Infragistics3.Documents.Excel.v11.1, Version=11.1.20111.2071, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Infragistics3.Documents.Excel.v11.1.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -122,11 +128,29 @@
     <Compile Include="Form_ProductPlan.Designer.cs">
       <DependentUpon>Form_ProductPlan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_SqlList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_SqlList.Designer.cs">
+      <DependentUpon>Form_SqlList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_SubItem.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_SubItem.Designer.cs">
       <DependentUpon>Form_SubItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_TableList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_TableList.Designer.cs">
+      <DependentUpon>Form_TableList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Update.Designer.cs">
+      <DependentUpon>Form_Update.cs</DependentUpon>
     </Compile>
     <Compile Include="Form_Userlist.cs">
       <SubType>Form</SubType>
@@ -166,8 +190,17 @@
     <EmbeddedResource Include="Form_ProductPlan.resx">
       <DependentUpon>Form_ProductPlan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_SqlList.resx">
+      <DependentUpon>Form_SqlList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_SubItem.resx">
       <DependentUpon>Form_SubItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_TableList.resx">
+      <DependentUpon>Form_TableList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Update.resx">
+      <DependentUpon>Form_Update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Userlist.resx">
       <DependentUpon>Form_Userlist.cs</DependentUpon>

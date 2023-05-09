@@ -18,7 +18,7 @@ namespace TestProject
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Infragistics.Win.AppStyling.StyleManager.Load(Application.StartupPath + @"\DarkGray.isl");
-			Application.Run(new Form_Home());
+			Application.Run(new Form1());
 		}
 	}
 }

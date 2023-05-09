@@ -40,12 +40,69 @@ namespace TestProject
 			{
 				Environment.Exit(0);
 			}
-			InitializeComponent();
+            var srt = File.OpenText("setup.txt");
+            var str = srt.ReadLine();
+            string sVersion = Convert.ToString(DataCheck());
+            common.sOldVersion = Convert.ToString(str);
+            if (sVersion == "1")
+            {
+                
+            }
+            else if (Convert.ToString(str) == sVersion)
+            {
+                srt.Close();
+            }
+            else if (Convert.ToString(str) != sVersion)
+            {
+                srt.Close();
+                if (MessageBox.Show("현재 구버전 사용으로 버전 업데이트를 하시겠습니까?", "업데이트 여부", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    Form_UpdateFlag UpFlg = new Form_UpdateFlag();
+                    UpFlg.ShowDialog();
+                    if (Convert.ToString(UpFlg.Tag) == "True")
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+            }
+            else
+            {
+                srt.Close();
+                MessageBox.Show("잘못된 프로그램입니다.", "알림",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+            InitializeComponent();
 			Form_Load(true); // 폼 초기화
 			this.Show();
-		}
+            notifyIcon = new NotifyIcon();
+            notifyIcon.Icon = SystemIcons.Information;
+            notifyIcon.Visible = true;
+        }
 
-		private void Home_Load(object sender = null, EventArgs e = null)
+        private string DataCheck()
+        {
+            var Conn = new SqlConnection("Data Source=222.235.141.8; Initial Catalog=KDTB_2JO; User ID= 2JO ; Password = 1234 ");
+            Conn.Open();
+            var Comm = new SqlCommand("Select TOP 1 * from Table_File ORDER BY Date desc", Conn);
+            var myRead = Comm.ExecuteReader();
+            if (myRead.Read())
+            {
+                var str = myRead["M_Num"].ToString();
+                myRead.Close();
+                Conn.Close();
+
+                return str;
+            }
+            else
+            {
+                myRead.Close();
+                Conn.Close();
+                return "1";
+            }
+        }
+
+        private void Home_Load(object sender = null, EventArgs e = null)
 		{
 			DBHelper helper = new DBHelper();
 			Btn.btnHide(btnClose, btnFind, btnNew, btnDelete, btnSave, BtnReset, btnsubClose, btnsubFind, btnsubNew, btnsubDelete, btnsubSave,  BtnSubReset, BtnExcel, BtnSubExcel); // 버튼 hide()
@@ -186,7 +243,7 @@ namespace TestProject
 				return;
 			}
 			DBHelper helper = new DBHelper();
-			helper.ExecuteNoneQuery("LoginList_U", ("@ID", common.sID));
+			helper.ExecuteNoneQuery("LoginList_U", "@ID", common.sID);
 
 			Form_Login login = new Form_Login();
 			if (PC1.Controls.Count > 0) PC1.Controls.RemoveAt(0);
@@ -210,7 +267,7 @@ namespace TestProject
 				if (MessageBox.Show("로그아웃 하시겠습니까?", "로그아웃", MessageBoxButtons.YesNo) == DialogResult.Yes)
 				{
 					DBHelper helper = new DBHelper();
-					helper.ExecuteNoneQuery("LoginList_U", ("@ID", common.sID));
+					helper.ExecuteNoneQuery("LoginList_U", "@ID", common.sID);
 					helper.Close();
 					Environment.Exit(0);
 				}
@@ -228,7 +285,7 @@ namespace TestProject
 				if (MessageBox.Show("로그아웃 하시겠습니까?", "로그아웃", MessageBoxButtons.YesNo) == DialogResult.Yes)
 				{
 					DBHelper helper = new DBHelper();
-					helper.ExecuteNoneQuery("LoginList_U", ("@ID", common.sID));
+					helper.ExecuteNoneQuery("LoginList_U", "@ID", common.sID);
 					helper.Close();
 					Environment.Exit(0);
 				}
@@ -243,10 +300,17 @@ namespace TestProject
 
 		private void Menu_AfterActivate(object sender, Infragistics.Win.UltraWinTree.NodeEventArgs e = null)
 		{
-			DBHelper helper = new DBHelper();
-			Infragistics.Win.UltraWinTree.UltraTree Name = (Infragistics.Win.UltraWinTree.UltraTree)sender;
-			string name = Name.ActiveNode.Text; // 활성화 된 하위 목록 텍스트 담기
+            Infragistics.Win.UltraWinTree.UltraTree Name = (Infragistics.Win.UltraWinTree.UltraTree)sender;
+            string name = Name.ActiveNode.Text; // 활성화 된 하위 목록 텍스트 담기
+            if(name == "파일 업로드")
+            {
+                Form_Update Update = new Form_Update();
+                Update.ShowDialog();
+                return;
+            }
 
+            DBHelper helper = new DBHelper();
+			
 			// 메뉴에 따른 화면 여부 확인
 			SqlDataAdapter Adapter = new SqlDataAdapter("FORM_S", helper.sCon);
 			Adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
@@ -296,7 +360,7 @@ namespace TestProject
 				alram = "Y";
 			}
 			DBHelper helper = new DBHelper();
-			helper.ExecuteNoneQuery("Alram_I", ("@ID", common.sID), ("@DATETIME", datetime), ("@MESSAGE", message), ("@ALRAMFLAG", alram));
+			helper.ExecuteNoneQuery("Alram_I", "@ID", common.sID, "@DATETIME", datetime, "@MESSAGE", message, "@ALRAMFLAG", alram);
 			helper.Close();
 			txtmessage.Text = "";
 			MessageBox.Show("메모가 등록이 되었습니다.");
@@ -326,7 +390,7 @@ namespace TestProject
 			if (drResult == DialogResult.No) return;
 			Byte[] bImage = null; // 이미지 파일이 등록 될 Byte 배열.
 
-			/*
+            /*
 						--------------      BinaryReader    --------------    FileStream      --------------   
 						 APP (Byte)      <--------------->   RAM(Binary)   <--------------->   File(Byte)
 						--------------                      --------------                    --------------
@@ -334,37 +398,41 @@ namespace TestProject
 						Binary 바이너리 : 컴퓨터(CPU) 가 인식 할 수 있는 0,1 로 이루어진 이진 코드. 
 					*/
 
-			// 2. 파일 스트림을 통해 파일을 오픈 하고 바이너리 형식으로 변환
-			// FileMode.Open : 경로에 있는 사진 파일에 접근
-			// FileAccess.Read : 읽기 전용으로 읽어 오겠다.
-			FileStream stream = new FileStream(Convert.ToString(PictureBox.Tag), FileMode.Open, FileAccess.Read);
+            // 2. 파일 스트림을 통해 파일을 오픈 하고 바이너리 형식으로 변환
+            // FileMode.Open : 경로에 있는 사진 파일에 접근
+            // FileAccess.Read : 읽기 전용으로 읽어 오겠다.
+            using (FileStream stream = new FileStream(Convert.ToString(PictureBox.Tag), FileMode.Open, FileAccess.Read))
+            {
+                // 3. 스트림을 통해 읽어온 Binary 코드 Byte 코드 변환.
+                BinaryReader reader = new BinaryReader(stream);
 
-			// 3. 스트림을 통해 읽어온 Binary 코드 Byte 코드 변환.
-			BinaryReader reader = new BinaryReader(stream);
+                // 4. 만들어진 Binary 코드의 이미지를 Byte 화 하여 APP 의 데이터 자료형 구조에 담는다.
+                bImage = reader.ReadBytes(Convert.ToInt32(stream.Length));
 
-			// 4. 만들어진 Binary 코드의 이미지를 Byte 화 하여 APP 의 데이터 자료형 구조에 담는다.
-			bImage = reader.ReadBytes(Convert.ToInt32(stream.Length));
+                // 5. 바이너리 리더 종료
+                reader.Close();
+                // 6. 파일 스트림 종료.
+                stream.Close();
+            }
 
-			// 5. 바이너리 리더 종료
-			reader.Close();
-			// 6. 파일 스트림 종료.
-			stream.Close();
+            using (SqlConnection sCon = new SqlConnection(common.sConn))
+            {
+                SqlCommand cmd = new SqlCommand();
+                sCon.Open();
+                cmd.Connection = sCon;
+                string sUPdateSql = " UPDATE TB_USER_R" +
+                                 $"  SET      PICTURE = @PICTURE " + // 품목 이미지 변수 생성
+                                 $"  WHERE    ID  = '{common.sID}' ";
 
-			SqlConnection sCon = new SqlConnection(common.sConn);
-			SqlCommand cmd = new SqlCommand();
-			sCon.Open();
-			cmd.Connection = sCon;
-			string sUPdateSql = " UPDATE TB_USER_R" +
-							 $"  SET      PICTURE = @PICTURE " + // 품목 이미지 변수 생성
-							 $"  WHERE    ID  = '{common.sID}' ";
+                cmd.Parameters.AddWithValue("@PICTURE", bImage);
+                cmd.CommandText = sUPdateSql;
+                cmd.ExecuteNonQuery();
 
-			cmd.Parameters.AddWithValue("@PICTURE", bImage);
-			cmd.CommandText = sUPdateSql;
-			cmd.ExecuteNonQuery();
+                MessageBox.Show("이미지가 정상적으로 등록 되었습니다.");
 
-			MessageBox.Show("이미지가 정상적으로 등록 되었습니다.");
-
-			sCon.Close();
+                sCon.Close();
+            }
+               
 			picture();
 		}
 
@@ -574,16 +642,22 @@ namespace TestProject
 		}
 		private void btnspend_Click(object sender, EventArgs e)
 		{
-			if (txtMe.Text == "") return;
-			string ME = txtMe.Text;
-			string ST = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now);
-			DBHelper helper = new DBHelper();
-			helper.ExecuteNoneQuery("MESSENGER_I", ("@ID", common.sID), ("@DATETIME", ST), ("@CONTENTS", ME));
-			helper.Close();
-			txtMe.Text = "";
-		}
+            string Info = "N";
+            if (txtMe.Text == "") return;
+            string ME = txtMe.Text;
+            string ST = string.Format("{0:yyyy-MM-dd HH:mm:ss}", DateTime.Now);
+            if (InfoM.Checked == true)
+            {
+                Info = "Y";
+            }
+            DBHelper helper = new DBHelper();
+            helper.ExecuteNoneQuery("MESSENGER_I", "@ID", common.sID, "@DATETIME", ST, "@CONTENTS", ME, "@INFO", Info);
+            helper.Close();
+            txtMe.Text = "";
 
-		private void txtMe_KeyDown(object sender, KeyEventArgs e)
+        }
+
+        private void txtMe_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (txtMe.Text == "") return;
 			if (e.KeyCode == Keys.Enter)
@@ -609,7 +683,7 @@ namespace TestProject
 				}
 
 				DBHelper helper = new DBHelper();
-				helper.ExecuteNoneQuery("Alram_D", ("@ID", common.sID), ("@DATE", ST));
+				helper.ExecuteNoneQuery("Alram_D", "@ID", common.sID, "@DATE", ST);
 				helper.Close();
 				txtmessage2.Text = "";
 			}
@@ -629,7 +703,7 @@ namespace TestProject
 			string PART  = txtPPart.Text;
 			string RANK  = txtPLevel.Text;
 
-			DBHelper helper = new DBHelper();
+            DBHelper helper = new DBHelper();
 			if (btnPSave.Text == "수정")
 			{
 				// 1 비밀번호 가 일치 하는제 데이터 베이스에서 확인
@@ -679,8 +753,8 @@ namespace TestProject
 					profil();
 					return;
 				}
-				helper.ExecuteNoneQuery("Profil_U", ("@ID", ID), ("@Name", Name), ("@PHONE", Phone), ("@SEX", SEX)
-												   , ("@PART", PART), ("@RANK", RANK), ("@PW", Pw));
+				helper.ExecuteNoneQuery("Profil_U", "@ID", ID, "@Name", Name, "@PHONE", Phone, "@SEX", SEX
+												   , "@PART", PART, "@RANK", RANK, "@PW", Pw);
 
 				MessageBox.Show("정상적으로 수정을 완료 하였습니다.");
 
